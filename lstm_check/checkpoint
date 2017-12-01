@@ -1,6 +1,2 @@
 model_checkpoint_path: "my-model-gpu-error-metric-dropout2-na-s.ckpt-6000"
-all_model_checkpoint_paths: "my-model-gpu-error-metric-dropout2-na-s.ckpt-2000"
-all_model_checkpoint_paths: "my-model-gpu-error-metric-dropout2-na-s.ckpt-3000"
-all_model_checkpoint_paths: "my-model-gpu-error-metric-dropout2-na-s.ckpt-4000"
-all_model_checkpoint_paths: "my-model-gpu-error-metric-dropout2-na-s.ckpt-5000"
 all_model_checkpoint_paths: "my-model-gpu-error-metric-dropout2-na-s.ckpt-6000"
