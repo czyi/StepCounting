@@ -30,7 +30,7 @@
 % in the camera-ready version and ask you to change it back.
 
 
-\title{Anime Artist Analysis based on CNN}
+\title{LSTM Recurrent Network for Step Counting based on WeAllWork Dataset}
 
 \author{Ziyi chen \\
   Computer Science  \\
@@ -45,20 +45,55 @@
 \maketitle
 \begin{abstract}
 
+Smartphone offers various sensors including accelerometers, gyroscope, magnetometer that can be used for pedometer and environment-related events. This paper train a LSTM recurrent network for counting the number of steps taken by blind/sighted users, based on WeAllWork Dataset. The model is build seperately for blind volunteers using long cann and guided dog as well as sighted volunteer.
 
 \end{abstract}
 
 \section{Introduction}
 
-\subsection{Dataset}
+Step Counting is the automatic determination of the strike heels times in a period. Step counters are becoming popular as a part of indoor navigation systems, as well as an exercise measurer. With the increasing ubiquity of smartphones, users are now carrying around a plenty of sensors like accelerometers, gyroscope, magnetometer with them wherever they go. 
 
-\section{Related Work}
+This paper use the indoor walking sensor data of iPhone to train a LSTM model to predict left/right steps and calculate count of steps. The model can also be used for estimating the distance and the position in pedestrian navigation systems indoor, which is especially helpful not only for blind people, but also for sighted people who need directional information in unfamiliar places.
+
+Since Blind people volunteers using long cann and guided dog as well as sighted volunteer have different features of motion, we seperately build model and calculate error rate of two metric.
+
+
+
+\section{Background and Related Work}
+\subsection{Step Counting Algorithms}
+\subsection{WeAllWalk Dataset}
+
+
+
+
 
 \section{Method}
+Long short-term memory (LSTM) network is a recurrent neural network, which is composed of four main components: a cell, an input gate, an output gate and a forget gate. There are different types of LSTMs, which differ among them in the components or connections that they have. An LSTM is well-suited to predict time series such as step counting.
+
+\subsection{Data Preprocess}
+
+\subsection{LSTM Model}
+We use TensorFlow to implement LSTM network. TensorFlow is an open-source software library that can be used for machine learning applications such as neural networks. It supports both CPU and GPU that can be imported as python library.
+
+TensorFlow uses a dataflow graph to represent computation in terms of the dependencies between individual operations. We first define the dataflow graph and then create a session to run the graph. The Saver class of TensorFlow can easily add ops to save and restore variables to and from checkpoints, which map variable names to tensor values.
+
+We build two layer LSTM network with dropout.
+
+
+
+ 
+
+\subsection{Error Metrics}
+%The quality of the considered step counting algorithms was measured using two different metrics. The first metric looks at the number of steps detected within each time interval separating two consecutive ground-truth heel strikes. Ideally, exactly one step should be detected within . If no steps are detected in, then an undercount event is recorded. If steps are detected within that interval, then	overcount events are recorded The cumulative number of undercount and overcount events are computed and normalized (divided) by the number of ground-truth steps.%
+
 
 \section{Experience}
 
-\section{Conclusion and  Future Work}
+
+
+
+
+\section{Conclusion and Future Work}
 
 
 
@@ -70,12 +105,13 @@
 %\bibliography{acl2015}
 
 \begin{thebibliography}{}
-\bibitem[\protect\citename{He, K.}2016]{He, K.:01}
-He, K., Zhang, X., Ren, S., Sun, J.
+
+\bibitem[\protect\citename{Flores, German H.}2016]{Flores, German H.:01}
+Flores, German H., and Roberto Manduchi.
 \newblock 2016.
-\newblock {\em Deep residual learning for image recognition.}.
-\newblock In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 770-778).
-\newblock Association for Computational Linguistics.
+\newblock {\em WeAllWalk: An Annotated Data Set of Inertial Sensor Time Series from Blind Walkers.}.
+\newblock WeAllWalk: An Annotated Data Set of Inertial Sensor Time Series from Blind Walkers. ACM, 2016.
+
 
 
 
@@ -86,3 +122,24 @@ He, K., Zhang, X., Ren, S., Sun, J.
 
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
