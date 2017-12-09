@@ -51,37 +51,57 @@ Smartphone offers various sensors including accelerometers, gyroscope, the magne
 
 \section{Introduction}
 
-Step Counting is the automatic determination of the strike heels times in a period. Step counters are becoming popular as a part of indoor navigation systems, as well as an exercise measurer. With the increasing ubiquity of smartphones, users are now carrying around a plenty of sensors like accelerometers, gyroscope, magnetometer with them wherever they go. 
+Originally used by sports and physical activity tracking, pedometers are now becoming popular as daily exercise counter and motivator. It counts each step a person takes by detecting the motion of the person's hands or hips.  Step counters can give encouragement to compete with oneself in getting fit and losing weight. Step counters are being integrated into an increasing number of portable consumer electronic devices such as music players, smartphones, and mobile phones. 
 
-This paper uses the indoor walking sensor data of iPhone to train an LSTM model to predict left/right steps and calculate the count of steps. The model can also be used for estimating the distance and the position in pedestrian navigation systems indoor, which is especially helpful not only for blind people, but also for sighted people who need directional information in unfamiliar places.
+With the increasing ubiquity of smartphones, users are now carrying around a plenty of sensors like accelerometers, gyroscope, magnetometer with them wherever they go. There are various of step counting apps in smartphones. Step counters can also be used for estimating the distance and the position in indoor pedestrian navigation systems, which is especially helpful not only for blind people, but also for sighted people who need directional information in unfamiliar places.
 
-Since Blind volunteers using long canes and guided dogs as well as sighted volunteers have different features of motion, we separately build the model and calculate the error rate of two metrics.
+This paper proposes an LSTM model trained by indoor walking sensor data of iPhone to predict left/right steps and calculate the count of steps. Since Blind volunteers using long canes and guided dogs as well as sighted volunteers have different features of gaits, we separately build the model and calculate the error rate of three metrics.
 
 
 
 \section{Background and Related Work}
-\subsection{Step Counting Algorithms}
+
+\subsection{Step Counting}
+
+Automatic step counting has received substantial attention from both  research and commercial. There is a wealth of studies on the use of inertial sensors for detecting and characterising walk-related activities. Pedometer is usually portable and electronic or electromechanical. When walking, the center of gravity should be slightly moved up and down, with the most obvious upward and downward displacement of the waist. Therefore, it is most appropriate for the pedometer to be hung on the belt. It can be embedded in shoes, in a smartwatch, in a smartphone, and attached to one’s ankles or hung on the belt. 
+
+A variety of algorithms have been proposed for stride event detection from inertial sensor time series. Some of these algorithms operate on the accelerometer data, while others use data from the gyros. For example, (WPD[7]) The Window Peak Detection algorithm runs a moving average window on the smoothed accelerometer magnitude to find peaks associated with a heel strike; (AMPD [44]) Automatic multiscale-based peak detection generic dectect peak detection in a signal; UPTIME [1]: UPTIME (Ubiquitous Pedestrian Tracking usIng Mobile phonEs) uses the de-trended magnitude of acceleration in a finite state machine (FSM), with six states to identify the peaks associated with heel strikes; HMM-acc [7][32] trains a Hidden Markov Model (HMM) to discern the different phases during a gait period; ZC-gyro [26] searches for zero crossings (ZC) within a moving window of the data from the gyro aligned with medial-lateral axis. All of the above algorithms have some parameters that must be learned from training data.
+
+%an excellent review of some of the main algorithms is presented in [7].
+Recent approaches to step detection include the use of recurrent neural networks. Researchs use RNN for evaluating and optimising accelerometer-based gesture recognition, self-calibration, pedestrian dead reckoning. Whereas the vast majority of step counting algorithms have been developed for able-bodied ambulators, some researchs have addressed the performances of these algorithms with sensors carried by people with some level of mobility impairment. 
+
+
+
 \subsection{WeAllWalk Dataset}
+WeAllWalk data set contains inertial sensor time series collected from ten blind walkers using a long cane or a guide dog and five sighted walkers. The participants walked through fairly long and complex indoor routes that included obstacles to be avoided and doors to be opened. Inertial data was recorded by iPhone 6s carried by participants in their pockets. Ground truth heel strike times were measured by two small inertial sensor units attached to the participants’ shoes. The data set contains a mobility impairment that may result in a gait pattern that is quite different than for sighted walkers. The data is subdivided into straight paths and turns and carefully annotated, with special events (or features, such as bumping into an obstacle) individually identified and marked.
 
-
-
-
-
-\section{Method}
-Long short-term memory (LSTM) network is a recurrent neural network. It can be used as blocks of recurrent neural network(RNN) network. There are different types of LSTMs, which differ in the components or connections that they have. An LSTM is suitable to predict time series such as step counting.
+\section{Implementation}
+We proposes an LSTM model trained by indoor walking sensor data of iPhone to predict left/right steps and calculate the count of steps. Since Blind volunteers using long canes and guided dogs as well as sighted volunteers have different features of gaits, we separately build the model and calculate the error rate of three metrics.
 
 \subsection{Data Preprocess}
 WeAllWalk dataset contains detailed maps of indoor paths, scripts to facilitate visualization of all the information in this data set and recorded sensor data for all users and all paths.
 
 We use two kinds of file from the dataset. First is the CSV file of iPhone sensor data as input. It contains records of all iPhone sensors. There are total 39 columns of sensor data and some of them are more useful such as rotation rate and user acceleration.
 
-Second is the XML files that contain annotated ground truth data for all the paths walked by all the participants as labels. Each file contains start and end times for each segment the user walked through and feature information like the left or right foot as well as direction. Since it only contains heel strike times, we cannot use it as labels directly. It is unreasonable to predict next strikes times by previous records. If we regard heel strike times as 1 and other times as 0, then the labels are unbalanced. So we apply the same sampling rate as CSV files and transform the XML file to 0-1 in which left steps as 1 and right steps as 0.
+Second is the XML files that contain annotated ground truth data for all the paths walked by all the participants as labels. Each file contains start and end times for each segment the user walked through and feature information like the left or right foot as well as direction. We only train and test the step detection algorithms on data acquired while traversing straight segments in the paths, where gait is assumed to be regular, and avoided segments labeled as features. This is because the notion of “step” is not well defined in such situations. In general, we argue that step counting only really matters during regular ambulation, as an indirect way to measure distances traversed.
 
-At beginning of each path, we don't the step of the participants, so these data are removed. Since we are interested in straight segments instead of turn segments, we also remove all turn data according to the change of direction recorded in XML files.
+Since it only contains heel strike times, we cannot use it as labels directly. It is unreasonable to predict next strikes times by previous records. If we regard heel strike times as 1 and other times as 0, then the labels are unbalanced. So we apply the same sampling rate as CSV files and transform the XML file to 0-1 in which left steps as 1 and right steps as 0.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.55]{ground_truth_1.png}
+\caption{Example of Heel Strike Times.}
+\label{fig:label}
+\end{figure}
+
+As shown in picture 1, the light color line of strike time is the origin data from XML file. It is transform to red line which regard left as 1 and right as 0. We also remove the turn data(light yellow background part) and feature data(light red backgound part).
+
 
 
 
 \subsection{LSTM Model}
+Long short-term memory (LSTM) network is a recurrent neural network. It can be used as blocks of recurrent neural network(RNN) network. There are different types of LSTMs, which differ in the components or connections that they have. An LSTM is suitable to predict time series such as step counting.
+
 We use TensorFlow to implement LSTM network. TensorFlow is an open-source software library that can be used for machine learning applications such as neural networks. It supports both CPU and GPU that can be imported as a python library.
 
 TensorFlow uses a dataflow graph to represent computation in terms of the dependencies between individual operations. We first define the dataflow graph and then create a session to run the graph. The Saver class of TensorFlow can easily add ops to save and restore variables to and from checkpoints, which map variable names to tensor values.
@@ -108,7 +128,12 @@ The model is trained with different input numbers, timesteps, output number, hid
 
 \section{Conclusion and Future Work}
 
-
+\begin{figure*}[ht]
+\centering
+\includegraphics[scale=0.6]{ground_truth_3.png}
+\caption{this is a figure demo}
+\label{fig:pathdemo4}
+\end{figure*}
 
 
 
@@ -119,14 +144,25 @@ The model is trained with different input numbers, timesteps, output number, hid
 
 \begin{thebibliography}{}
 
-\bibitem[\protect\citename{Flores, German H.}2016]{Flores, German H.:01}
+\bibitem[\protect\citename{Flores}]{Flores}
 Flores, German H., and Roberto Manduchi.
-\newblock 2016.
+\newblock (2016)
 \newblock {\em WeAllWalk: An Annotated Data Set of Inertial Sensor Time Series from Blind Walkers.}.
-\newblock WeAllWalk: An Annotated Data Set of Inertial Sensor Time Series from Blind Walkers. ACM, 2016.
+\newblock Proceedings of the 18th International ACM SIGACCESS Conference on Computers and Accessibility. ACM, 2016.
 
 
+\bibitem[\protect\citename{Brajdic}]{Brajdic}
+Brajdic, Agata, and Robert Harle.
+\newblock (2013)
+\newblock {\em Walk detection and step counting on unconstrained smartphones.}.
+\newblock Proceedings of the 2013 ACM international joint conference on Pervasive and ubiquitous computing. ACM, 2013.
 
+
+\bibitem[\protect\citename{Edel}]{Brajdic}
+Edel, Marcus, and Enrico Köppe.
+\newblock (2015)
+\newblock {\em An advanced method for pedestrian dead reckoning using BLSTM-RNNs.}.
+\newblock Indoor Positioning and Indoor Navigation (IPIN), 2015 International Conference on. IEEE, 2015.
 
 
 
