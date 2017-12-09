@@ -63,6 +63,14 @@ This paper proposes an LSTM model trained by indoor walking sensor data of iPhon
 
 \subsection{Step Counting}
 
+\begin{figure*}[ht]
+\centering
+\includegraphics[scale=0.5]{ground_truth_2}
+\caption{Example heel strike times of T1\_ID1\_WC.xml from 2.4s to 34.4s. First step is left feet at 5.4761s. A feature motion (the participant walked into the wall, stopped, and moved to the left) happened from 9.041862s to 10.041862s. Two turn motion, Turn east to south from 13.1752s to 20.7419 and Turn south to east from 30.0419 happened. All data before first step as well as feature and turn data are removed.}
+\label{fig:label}
+\end{figure*}
+
+
 Automatic step counting has received substantial attention from both  research and commercial. There is a wealth of studies on the use of inertial sensors for detecting and characterising walk-related activities. Pedometer is usually portable and electronic or electromechanical. When walking, the center of gravity should be slightly moved up and down, with the most obvious upward and downward displacement of the waist. Therefore, it is most appropriate for the pedometer to be hung on the belt. It can be embedded in shoes, in a smartwatch, in a smartphone, and attached to one’s ankles or hung on the belt. 
 
 A variety of algorithms have been proposed for stride event detection from inertial sensor time series. Some of these algorithms operate on the accelerometer data, while others use data from the gyros. For example, (WPD[7]) The Window Peak Detection algorithm runs a moving average window on the smoothed accelerometer magnitude to find peaks associated with a heel strike; (AMPD [44]) Automatic multiscale-based peak detection generic dectect peak detection in a signal; UPTIME [1]: UPTIME (Ubiquitous Pedestrian Tracking usIng Mobile phonEs) uses the de-trended magnitude of acceleration in a finite state machine (FSM), with six states to identify the peaks associated with heel strikes; HMM-acc [7][32] trains a Hidden Markov Model (HMM) to discern the different phases during a gait period; ZC-gyro [26] searches for zero crossings (ZC) within a moving window of the data from the gyro aligned with medial-lateral axis. All of the above algorithms have some parameters that must be learned from training data.
@@ -75,10 +83,19 @@ Recent approaches to step detection include the use of recurrent neural networks
 \subsection{WeAllWalk Dataset}
 WeAllWalk data set contains inertial sensor time series collected from ten blind walkers using a long cane or a guide dog and five sighted walkers. The participants walked through fairly long and complex indoor routes that included obstacles to be avoided and doors to be opened. Inertial data was recorded by iPhone 6s carried by participants in their pockets. Ground truth heel strike times were measured by two small inertial sensor units attached to the participants’ shoes. The data set contains a mobility impairment that may result in a gait pattern that is quite different than for sighted walkers. The data is subdivided into straight paths and turns and carefully annotated, with special events (or features, such as bumping into an obstacle) individually identified and marked.
 
+
 \section{Implementation}
 We proposes an LSTM model trained by indoor walking sensor data of iPhone to predict left/right steps and calculate the count of steps. Since Blind volunteers using long canes and guided dogs as well as sighted volunteers have different features of gaits, we separately build the model and calculate the error rate of three metrics.
 
 \subsection{Data Preprocess}
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[scale=1]{input2}
+\caption{Input (green) and output (pink) example for LSTM. Use previous timesteps(t) records of sensor data (green blocks) to predict the last foot step (last pink foot). The fisrt timesteps(eg. t=50) outputs of each segement are determined by intermediate outputs (light pink) since they don't have enough previous record. Shuffle and divide train data into the small batchs as inputs.}
+\label{fig:label}
+\end{figure*}
+
 WeAllWalk dataset contains detailed maps of indoor paths, scripts to facilitate visualization of all the information in this data set and recorded sensor data for all users and all paths.
 
 We use two kinds of file from the dataset. First is the CSV file of iPhone sensor data as input. It contains records of all iPhone sensors. There are total 39 columns of sensor data and some of them are more useful such as rotation rate and user acceleration.
@@ -87,46 +104,81 @@ Second is the XML files that contain annotated ground truth data for all the pat
 
 Since it only contains heel strike times, we cannot use it as labels directly. It is unreasonable to predict next strikes times by previous records. If we regard heel strike times as 1 and other times as 0, then the labels are unbalanced. So we apply the same sampling rate as CSV files and transform the XML file to 0-1 in which left steps as 1 and right steps as 0.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.55]{ground_truth_1.png}
-\caption{Example of Heel Strike Times.}
-\label{fig:label}
-\end{figure}
-
 As shown in picture 1, the light color line of strike time is the origin data from XML file. It is transform to red line which regard left as 1 and right as 0. We also remove the turn data(light yellow background part) and feature data(light red backgound part).
 
 
 
 
 \subsection{LSTM Model}
-Long short-term memory (LSTM) network is a recurrent neural network. It can be used as blocks of recurrent neural network(RNN) network. There are different types of LSTMs, which differ in the components or connections that they have. An LSTM is suitable to predict time series such as step counting.
+Long short-term memory (LSTM) network is a recurrent neural network. It can be used as blocks of recurrent neural network(RNN) network. There are different types of LSTMs, which differ in the components or connections that they have. An LSTM layer consists of a number of recurrently connected memory blocks. Each block contains one or more recurrently connected memory cells and three multiplicative units, the input, output, and forget gates, which control the information flow inside the memory block. The surrounding network can only interact with the memory cells via the gates. In other words, these gates and the memory cell allow an LSTM unit to adaptively forget, memorize and expose the memory content. Due to above characteristic, LSTM is suitable to predict time series such as step counting.
 
-We use TensorFlow to implement LSTM network. TensorFlow is an open-source software library that can be used for machine learning applications such as neural networks. It supports both CPU and GPU that can be imported as a python library.
+We use TensorFlow to implement LSTM network. TensorFlow is an open-source software library that can be used for machine learning applications such as neural networks. It supports both CPU and GPU that can be imported as a python library. TensorFlow uses a dataflow graph to represent computation in terms of the dependencies between individual operations. We first define the dataflow graph and then create a session to run the graph. The Saver class of TensorFlow can easily add ops to save and restore variables to and from checkpoints, which map variable names to tensor values.
 
-TensorFlow uses a dataflow graph to represent computation in terms of the dependencies between individual operations. We first define the dataflow graph and then create a session to run the graph. The Saver class of TensorFlow can easily add ops to save and restore variables to and from checkpoints, which map variable names to tensor values.
+A two-layer RNN network with basic LSTM cell and dropout wrapper is built for training with squared difference loss function. The input is a list of metrics with the row of timesteps and col of sensor data. For Example, we want to use previous timesteps ($=50$) record of sensor data to predict the result, each sensor data contains input number ($=6$) values of rotation rate and user acceleration. So the matrix size is timesteps multiply input number($50 \times 6$). All such metrics form the input list and is transformed to tensor. Since the dataset is big and there are more than one hundred thousand elements in input list which would make the training process very slow, we shuffle and divide train data into the small batch (batch size = 256) and feed the batch to model.
 
-A two-layer RNN network with basic LSTM cell and dropout wrapper is built for training with squared difference loss function. The input is a list of metrics with the row of timesteps and col of sensor data. For Example, we want to use previous timesteps ($=50$) record of sensor data to predict the result, each sensor data contains input number ($=6$) values of rotation rate and user acceleration. So the matrix size is timesteps multiply input number($50 \times 6$). All such metrics form the input list and is transformed to tensor. Since the dataset is big and there are more than one hundred thousand elements in input list which would make the training process very slow, we divide input data into the small batch (batch size = 256) and feed the batch to model.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{LSTM3}
+\caption{Two layer LSTM recurrent network. Each green block is a LSTM Block with number of hidden nodes. Blue circle D represent for sensor data, s is the lstm state, pink circle F is the output feet, which is a float value around 0 to 1.}
+\label{fig:label}
+\end{figure}
 
-There are two ways of output. One is to use previous timesteps data to predict only the last step result, which is a float value around 0 to 1. We use 0.5 as the border to classify left and right steps. And the heel strike times is when 0 change to 1 or 1 change to 0. The other is to use previous timesteps data to predict corresponding timesteps step results. The first one cannot predict the first timesteps result, but it is more precise since all result is predicted by previous timesteps record.
+\begin{figure*}[ht]
+\centering
+\includegraphics[scale=0.6]{error_metric}
+\caption{Example of three error metrics. Assume above plot is a entire segement. Error metric 1 (read line) split intervals exactly at each heel strike times. Error metric 2 (blue line) split intervals exactly at middle of every two continues heel strike times. Error metric 3 calculate undercount and overcount for the entire segment.}
+\label{fig:label}
+\end{figure*}
+
+There are two ways of output. One is to use previous timesteps data to predict only the last step result, which is a float value around 0 to 1. We use 0.5 as the border to classify left and right steps. And the heel strike times is when 0 change to 1 or 1 change to 0. The other is to use previous timesteps data to predict corresponding timesteps step results. The first one cannot predict the first timesteps result, but it is more precise since all result is predicted by previous timesteps record. Most outputs that have enough previous records use first way to calculate.
+
+
+
+
+
 
 \subsection{Error Metrics}
 The round of result is a list of left/right step corresponding to origin step. Then calculate the accuracy rate of the result, which is the proportion of correct numbers (left is predicted to be left and right is predicted to be right) and total numbers.
 
-The quality of the step counting model was measured using two different metrics. The first metric looks at the number of steps detected within each time interval separating two consecutive ground-truth heel strikes. Ideally, exactly one step should be detected within one interval. If no steps are detected in, then an undercount event is recorded. If steps are detected within that interval, the overcount events are recorded. The cumulative number of undercount and overcount events are computed and normalized (divided) by the number of ground-truth steps.
 
-The second metric simply computes the difference between the number of detected steps within each segment and the number of ground-truth steps within the same segment. The difference between the two is recorded as an undercount value if negative, as an overcount if positive. Undercount and overcount values are then summed together over all segments, and normalized by the total number of ground-truth steps.
+The quality of the step counting model was measured using three different metrics. The first metric looks at the number of steps detected within each time interval $[T_i, T_{i+1}]$ separating two consecutive ground-truth heel strikes. Ideally, exactly one step should be detected within one interval $[T_i, T_{i+1}]$. If no steps are detected in $[T_i, T_{i+1}]$, then an undercount event is recorded. If steps are detected within that interval, the overcount events are recorded. The cumulative number of undercount and overcount events are computed and normalized (divided) by the number of ground-truth steps.
+
+The second metric is similar to the first,  but it looks at the number of steps detected within each time interval $[\frac{T_{i-1}+T_i}{2}, \frac{T_i+T_{i+1}}{2}]$ separating two consecutive ground-truth heel strikes. Ideally, exactly one step should be detected within one interval $[\frac{T_{i-1}+T_i}{2}, \frac{T_i+T_{i+1}}{2}]$. The undercount and overcount is calculated same as first metric. The metric can decrease error when one step is detected sightly earlier ($t_i<T_i$) and the next step is detected sighted later ($t_{i+1}<T_{i+1}$). For this case, interval $[T_i, T_{i+1}]$ has one undercount, and interval $[T_{i-1}, T_i]$ and $[T_{i+1}, T_{i+2}]$ have one overcount.
+
+The third metric simply computes the difference between the number of detected steps within each segment and the number of ground-truth steps within the same segment. The difference between the two is recorded as an undercount value if negative, as an overcount if positive. Undercount and overcount values are then summed together over all segments, and normalized by the total number of ground-truth steps.
+
+Note that the normalized undercount and overcount values obtained by the error metric 1 and 2 metric is always larger than or equal to the corresponding values computed by the metric 3, as missed counts or double counts between a time interval $[T_i, T_{i+1}]$ may even out over multiple steps. While the more lenient metric 5 may be appropriate when measuring step counts over long hauls, the more conservative metric 1 may be useful when fine-grained tracking is desired. When training and benchmarking the algorithms, the sum of overcount and undercount rates is used for both error metrics.
 
 
 \section{Experience}
 The model is trained with different input numbers, timesteps, output number, hidden layer number, optimizer, learning rate and training steps. We first try different optimizers with various learning rate and find that AdamOptimizer with learning rate around 0.001 can make it convergence, and then fix the two parameters.
 
 \subsection{Blind People with Long Canes}
+
+
+
+
+
 \subsection{Blind People with Guide Dogs}
+
+
+
+
+
 \subsection{Sighted people}
 
 
+
+
+
+
 \section{Conclusion and Future Work}
+
+
+
+
+
+
 
 \begin{figure*}[ht]
 \centering
@@ -158,11 +210,60 @@ Brajdic, Agata, and Robert Harle.
 \newblock Proceedings of the 2013 ACM international joint conference on Pervasive and ubiquitous computing. ACM, 2013.
 
 
-\bibitem[\protect\citename{Edel}]{Brajdic}
+\bibitem[\protect\citename{Edel}]{Edel}
 Edel, Marcus, and Enrico Köppe.
 \newblock (2015)
 \newblock {\em An advanced method for pedestrian dead reckoning using BLSTM-RNNs.}.
 \newblock Indoor Positioning and Indoor Navigation (IPIN), 2015 International Conference on. IEEE, 2015.
+
+
+\bibitem[\protect\citename{Naqvib}]{Naqvib}
+Naqvib, Najme Zehra, Ashwani Kumar, Aanchal Chauhan, and Kritka Sahni.
+\newblock (2012)
+\newblock {\em Step counting using smartphone-based accelerometer.}.
+\newblock International Journal on Computer Science and Engineering 4, no. 5 (2012): 675.
+
+
+\bibitem[\protect\citename{Alzantot}]{Alzantot}
+Alzantot, Moustafa, and Moustafa Youssef.
+\newblock (2012)
+\newblock {\em UPTIME: Ubiquitous pedestrian tracking using mobile phones.}.
+\newblock Wireless Communications and Networking Conference (WCNC), 2012 IEEE.
+	
+
+\bibitem[\protect\citename{Tomlein}]{Tomlein}
+Tomlein, Michal, Pavol Bielik, Peter Krátky, Stefan Mitrík, Michal Barla, and Mária Bieliková.
+\newblock (2012)
+\newblock {\em Advanced Pedometer for Smartphone-based Activity Tracking.}.
+\newblock In HEALTHINF, pp. 401-404. 2012.
+
+
+\bibitem[\protect\citename{Oshin}]{Oshin}
+Oshin, Thomas Olutoyin, and Stefan Poslad.
+\newblock (2013)
+\newblock {\em ERSP: An energy-efficient real-time smartphone pedometer.}.
+\newblock In Systems, Man, and Cybernetics (SMC), 2013 IEEE International Conference on, pp. 2067-2072. IEEE, 2013.
+
+
+\bibitem[\protect\citename{Case}]{Case}
+Case, Meredith A., Holland A. Burwick, Kevin G. Volpp, and Mitesh S. Patel.
+\newblock (2015)
+\newblock {\em Accuracy of smartphone applications and wearable devices for tracking physical activity data.}.
+\newblock Jama 313, no. 6 (2015): 625-626.
+
+
+\bibitem[\protect\citename{Haegele}]{Haegele}
+Haegele, Justin A., and David L. Porretta.
+\newblock (2015)
+\newblock {\em Validation of a Talking Pedometer for Adolescents with Visual Impairments in Free-Living Conditions.}.
+\newblock Journal of Visual Impairment \& Blindness 109, no. 3 (2015): 219-223.
+
+\bibitem[\protect\citename{Holbrook}]{Holbrook}
+Holbrook, Elizabeth Ackley, Sandy L. Stevens, Minsoo Kang, and Don W. Morgan.
+\newblock (2011)
+\newblock {\em Validation of a talking pedometer for adults with visual impairment.}.
+\newblock Medicine \& Science in Sports \& Exercise 43, no. 6 (2011): 1094-1099.
+
 
 
 
