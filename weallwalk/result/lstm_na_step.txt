@@ -1,11 +1,11 @@
 # step = 2000
 error : 
-total undercount metric 1:	 0.0859073359073359
-total overcount metric 1:	 0.37886100386100385
-total undercount metric 2:	 0.17326254826254825
-total overcount metric 2:	 0.4864864864864865
-total undercount metric 3:	 0.0
-total overcount metric 3:	 0.31322393822393824
+total/ undercount metric 1:	 0.0859073359073359
+total/ overcount metric 1:	 0.37886100386100385
+total/ undercount metric 2:	 0.17326254826254825
+total/ overcount metric 2:	 0.4864864864864865
+total/ undercount metric 3:	 0.0
+total/ overcount metric 3:	 0.31322393822393824
 
 # step = 3000
 error

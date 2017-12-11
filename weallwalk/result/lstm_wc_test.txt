@@ -1,0 +1,70 @@
+timesteps=100
+step=4000
+
+cross validation  0
+error : 
+total undercount metric 1:   0.22518457752255946
+total overcount metric 1:    0.3490566037735849
+total undercount metric 2:   0.06931911402789172
+total overcount metric 2:    0.2210828547990156
+total undercount metric 3:   0.00041017227235438887
+total overcount metric 3:    0.15217391304347827
+
+
+cross validation  1
+error : 
+total undercount metric 1:   0.1767842493847416
+total overcount metric 1:    0.2666119770303528
+total undercount metric 2:   0.10910582444626743
+total overcount metric 2:    0.22272354388843313
+total undercount metric 3:   0.002871205906480722
+total overcount metric 3:    0.11648892534864644
+
+
+
+cross validation  2
+error : 
+total undercount metric 1:   0.20098441345365053
+total overcount metric 1:    0.27645611156685806
+total undercount metric 2:   0.24938474159146842
+total overcount metric 2:    0.3502871205906481
+total undercount metric 3:   0.002050861361771944
+total overcount metric 3:    0.1029532403609516
+
+
+
+cross validation  3
+error : 
+total undercount metric 1:   0.1948318293683347
+total overcount metric 1:    0.3162428219852338
+total undercount metric 2:   0.08572600492206726
+total overcount metric 2:    0.23379819524200163
+total undercount metric 3:   0.0012305168170631665
+total overcount metric 3:    0.14930270713699753
+
+
+
+
+
+cross validation  4
+error : 
+total undercount metric 1:   0.1509433962264151
+total overcount metric 1:    0.24856439704675964
+total undercount metric 2:   0.08736669401148482
+total overcount metric 2:    0.21164889253486463
+total undercount metric 3:   0.0008203445447087777
+total overcount metric 3:    0.1251025430680886
+
+
+
+cross validation  5
+error : 
+total undercount metric 1:   0.14150943396226415
+total overcount metric 1:    0.23379819524200163
+total undercount metric 2:   0.09146841673502872
+total overcount metric 2:    0.20795734208367514
+total undercount metric 3:   0.0012305168170631665
+total overcount metric 3:    0.11771944216570959
+
+
+

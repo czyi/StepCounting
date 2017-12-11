@@ -1,0 +1,132 @@
+2200
+100
+
+cv0
+test
+error : 
+total undercount metric 1:	 0.051112943116240726
+total overcount metric 1:	 0.16611706512778235
+total undercount metric 2:	 0.09975267930750206
+total overcount metric 2:	 0.2407254740313273
+total undercount metric 3:	 0.0008244023083264633
+total overcount metric 3:	 0.14179719703215168
+
+valid
+error : 
+vtotal undercount metric 1:	 0.048639736191261336
+vtotal overcount metric 1:	 0.06100577081615829
+vtotal undercount metric 2:	 0.06306677658697445
+vtotal overcount metric 2:	 0.09109645507007419
+vtotal undercount metric 3:	 0.004122011541632316
+vtotal overcount metric 3:	 0.03215169002473207
+
+---------
+cv1
+test
+error : 
+total undercount metric 1:	 0.12961443806398687
+total overcount metric 1:	 0.21985233798195242
+total undercount metric 2:	 0.11894995898277276
+total overcount metric 2:	 0.23420836751435603
+total undercount metric 3:	 0.002871205906480722
+total overcount metric 3:	 0.11812961443806398
+
+
+valid
+error : 
+error : 
+total undercount metric 1:	 0.11498091603053436
+total overcount metric 1:	 0.35591603053435117
+total undercount metric 2:	 0.1383587786259542
+total overcount metric 2:	 0.42843511450381677
+total undercount metric 3:	 0.0
+total overcount metric 3:	 0.2900763358778626
+
+-------
+cv2
+test
+error : 
+total undercount metric 1:	 0.13535684987694832
+total overcount metric 1:	 0.21534044298605415
+total undercount metric 2:	 0.17842493847415913
+total overcount metric 2:	 0.2830188679245283
+total undercount metric 3:	 0.00041017227235438887
+total overcount metric 3:	 0.10500410172272355
+
+valid
+error : 
+total undercount metric 1:	 0.1512532411408816
+total overcount metric 1:	 0.17026793431287812
+total undercount metric 2:	 0.13915298184961106
+total overcount metric 2:	 0.18193604148660328
+total undercount metric 3:	 0.02679343128781331
+total overcount metric 3:	 0.07130509939498704
+
+------------
+cv3
+test
+error : 
+total undercount metric 1:	 0.2321575061525841
+total overcount metric 1:	 0.2670221493027071
+total undercount metric 2:	 0.07465135356849877
+total overcount metric 2:	 0.13535684987694832
+total undercount metric 3:	 0.015586546349466776
+total overcount metric 3:	 0.07629204265791632
+
+valid
+error : 
+error : 
+total undercount metric 1:	 0.12077789150460594
+total overcount metric 1:	 0.27993858751279427
+total undercount metric 2:	 0.1120777891504606
+total overcount metric 2:	 0.3060388945752303
+total undercount metric 3:	 0.0030706243602865915
+total overcount metric 3:	 0.1970317297850563
+
+-----------
+cv4
+test
+error : 
+total undercount metric 1:	 0.2165709598031173
+total overcount metric 1:	 0.3445447087776866
+total undercount metric 2:	 0.03732567678424938
+total overcount metric 2:	 0.19975389663658738
+total undercount metric 3:	 0.0012305168170631665
+total overcount metric 3:	 0.16365873666940114
+
+valid
+error : 
+total undercount metric 1:	 0.04074295985620132
+total overcount metric 1:	 0.11024565608148593
+total undercount metric 2:	 0.10904733373277412
+total overcount metric 2:	 0.2127022168963451
+total undercount metric 3:	 0.0017974835230677051
+total overcount metric 3:	 0.1054523666866387
+
+-------
+cv5
+test
+error : 
+error : 
+total undercount metric 1:	 0.1501230516817063
+total overcount metric 1:	 0.24938474159146842
+total undercount metric 2:	 0.15545529122231339
+total overcount metric 2:	 0.2752255947497949
+total undercount metric 3:	 0.00041017227235438887
+total overcount metric 3:	 0.12018047579983593
+
+valid
+error : 
+total undercount metric 1:	 0.11487676056338028
+total overcount metric 1:	 0.21390845070422534
+total undercount metric 2:	 0.09286971830985916
+total overcount metric 2:	 0.2108274647887324
+total undercount metric 3:	 0.00528169014084507
+total overcount metric 3:	 0.12323943661971831
+
+
+
+
+
+
+

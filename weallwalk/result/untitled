@@ -1,0 +1,74 @@
+0
+t
+error : 
+total undercount metric 1:	 0.11007268951194185
+total overcount metric 1:	 0.2580477673935618
+total undercount metric 2:	 0.04101765316718588
+total overcount metric 2:	 0.23208722741433022
+total undercount metric 3:	 0.0
+total overcount metric 3:	 0.19106957424714435
+
+v
+
+
+
+
+1
+t
+error : 
+total undercount metric 1:	 0.19158878504672897
+total overcount metric 1:	 0.18276220145379024
+total undercount metric 2:	 0.002596053997923157
+total overcount metric 2:	 0.027518172377985463
+total undercount metric 3:	 0.001557632398753894
+total overcount metric 3:	 0.0264797507788162
+
+v
+error : 
+total undercount metric 1:	 0.08759124087591241
+total overcount metric 1:	 0.2962287104622871
+total undercount metric 2:	 0.13442822384428224
+total overcount metric 2:	 0.3771289537712895
+total undercount metric 3:	 0.004257907542579075
+total overcount metric 3:	 0.24695863746958638
+
+
+2
+t
+error : 
+total undercount metric 1:	 0.18639667705088267
+total overcount metric 1:	 0.17133956386292834
+total undercount metric 2:	 0.004153686396677051
+total overcount metric 2:	 0.021287642782969886
+total undercount metric 3:	 0.002596053997923157
+total overcount metric 3:	 0.01973001038421599
+
+v
+error : 
+total undercount metric 1:	 0.1037037037037037
+total overcount metric 1:	 0.7105820105820105
+total undercount metric 2:	 0.02857142857142857
+total overcount metric 2:	 0.6777777777777778
+total undercount metric 3:	 0.0
+total overcount metric 3:	 0.6492063492063492
+
+
+3
+t
+error : 
+total undercount metric 1:	 0.1770508826583593
+total overcount metric 1:	 0.16978193146417445
+total undercount metric 2:	 0.002596053997923157
+total overcount metric 2:	 0.01921079958463136
+total undercount metric 3:	 0.001557632398753894
+total overcount metric 3:	 0.018172377985462097
+
+
+v
+error : 
+total undercount metric 1:	 0.10740402193784278
+total overcount metric 1:	 0.11425959780621572
+total undercount metric 2:	 0.009140767824497258
+total overcount metric 2:	 0.027422303473491772
+total undercount metric 3:	 0.005941499085923218
+total overcount metric 3:	 0.024223034734917732

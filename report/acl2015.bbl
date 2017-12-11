@@ -1,0 +1,119 @@
+\begin{thebibliography}{}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Ahmetovic et~al.(2016)Ahmetovic, Gleason, Ruan, Kitani, Takagi, and
+  Asakawa}]{ahmetovic2016navcog}
+Dragan Ahmetovic, Cole Gleason, Chengxiong Ruan, Kris Kitani, Hironobu Takagi,
+  and Chieko Asakawa. 2016.
+\newblock Navcog: a navigational cognitive assistant for the blind.
+\newblock In {\em Proceedings of the 18th International Conference on
+  Human-Computer Interaction with Mobile Devices and Services\/}. ACM, pages
+  90--99.
+
+\bibitem[{Ailisto et~al.(2005)Ailisto, Lindholm, Mantyjarvi, Vildjiounaite, and
+  Makela}]{ailisto2005identifying}
+Heikki~J Ailisto, Mikko Lindholm, Jani Mantyjarvi, Elena Vildjiounaite, and
+  Satu-Marja Makela. 2005.
+\newblock Identifying people from gait pattern with accelerometers.
+\newblock In {\em Proc. SPIE\/}. volume 5779, pages 7--14.
+
+\bibitem[{Alzantot and Youssef(2012)}]{alzantot2012uptime}
+Moustafa Alzantot and Moustafa Youssef. 2012.
+\newblock Uptime: Ubiquitous pedestrian tracking using mobile phones.
+\newblock In {\em Wireless Communications and Networking Conference (WCNC),
+  2012 IEEE\/}. IEEE, pages 3204--3209.
+
+\bibitem[{Brajdic and Harle(2013)}]{brajdic2013walk}
+Agata Brajdic and Robert Harle. 2013.
+\newblock Walk detection and step counting on unconstrained smartphones.
+\newblock In {\em Proceedings of the 2013 ACM international joint conference on
+  Pervasive and ubiquitous computing\/}. ACM, pages 225--234.
+
+\bibitem[{Case et~al.(2015)Case, Burwick, Volpp, and Patel}]{case2015accuracy}
+Meredith~A Case, Holland~A Burwick, Kevin~G Volpp, and Mitesh~S Patel. 2015.
+\newblock Accuracy of smartphone applications and wearable devices for tracking
+  physical activity data.
+\newblock {\em Jama\/} 313(6):625--626.
+
+\bibitem[{Coughlan et~al.(2006)Coughlan, Manduchi, and Shen}]{coughlan2006cell}
+James Coughlan, Roberto Manduchi, and Huiying Shen. 2006.
+\newblock Cell phone-based wayfinding for the visually impaired.
+\newblock In {\em 1st International Workshop on Mobile Vision\/}. pages 1--15.
+
+\bibitem[{Edel and K{\"o}ppe(2015)}]{edel2015advanced}
+Marcus Edel and Enrico K{\"o}ppe. 2015.
+\newblock An advanced method for pedestrian dead reckoning using blstm-rnns.
+\newblock In {\em Indoor Positioning and Indoor Navigation (IPIN), 2015
+  International Conference on\/}. IEEE, pages 1--6.
+
+\bibitem[{Flores and Manduchi(2016)}]{flores2016weallwalk}
+German~H Flores and Roberto Manduchi. 2016.
+\newblock Weallwalk: An annotated data set of inertial sensor time series from
+  blind walkers.
+\newblock In {\em Proceedings of the 18th International ACM SIGACCESS
+  Conference on Computers and Accessibility\/}. ACM, pages 141--150.
+
+\bibitem[{Gers et~al.(1999)Gers, Schmidhuber, and Cummins}]{gers1999learning}
+Felix~A Gers, J{\"u}rgen Schmidhuber, and Fred Cummins. 1999.
+\newblock Learning to forget: Continual prediction with lstm .
+
+\bibitem[{Haegele and Porretta(2015)}]{haegele2015validation}
+Justin~A Haegele and David~L Porretta. 2015.
+\newblock Validation of a talking pedometer for adolescents with visual
+  impairments in free-living conditions.
+\newblock {\em Journal of Visual Impairment \& Blindness\/} 109(3):219--223.
+
+\bibitem[{Hallemans et~al.(2010)Hallemans, Ortibus, Meire, and
+  Aerts}]{hallemans2010low}
+Ann Hallemans, Els Ortibus, Francoise Meire, and Peter Aerts. 2010.
+\newblock Low vision affects dynamic stability of gait.
+\newblock {\em Gait \& posture\/} 32(4):547--551.
+
+\bibitem[{Holbrook et~al.(2011)Holbrook, Stevens, Kang, and
+  Morgan}]{holbrook2011validation}
+Elizabeth~Ackley Holbrook, Sandy~L Stevens, Minsoo Kang, and Don~W Morgan.
+  2011.
+\newblock Validation of a talking pedometer for adults with visual impairment.
+\newblock {\em Medicine \& Science in Sports \& Exercise\/} 43(6):1094--1099.
+
+\bibitem[{Jayalath et~al.(2013)Jayalath, Abhayasinghe, and
+  Murray}]{jayalath2013gyroscope}
+Sampath Jayalath, Nimsiri Abhayasinghe, and Iain Murray. 2013.
+\newblock A gyroscope based accurate pedometer algorithm.
+\newblock In {\em International Conference on Indoor Positioning and Indoor
+  Navigation\/}. volume~28, page 31st.
+
+\bibitem[{Mannini and Sabatini(2011)}]{mannini2011hidden}
+Andrea Mannini and Angelo~Maria Sabatini. 2011.
+\newblock A hidden markov model-based technique for gait segmentation using a
+  foot-mounted gyroscope.
+\newblock In {\em Engineering in Medicine and Biology Society, EMBC, 2011
+  Annual International Conference of the IEEE\/}. IEEE, pages 4369--4373.
+
+\bibitem[{Naqvib et~al.(2012)Naqvib, Kumar, Chauhan, and
+  Sahni}]{naqvib2012step}
+Najme~Zehra Naqvib, Ashwani Kumar, Aanchal Chauhan, and Kritka Sahni. 2012.
+\newblock Step counting using smartphone-based accelerometer.
+\newblock {\em International Journal on Computer Science and Engineering\/}
+  4(5):675.
+
+\bibitem[{Oshin and Poslad(2013)}]{oshin2013ersp}
+Thomas~Olutoyin Oshin and Stefan Poslad. 2013.
+\newblock Ersp: An energy-efficient real-time smartphone pedometer.
+\newblock In {\em Systems, Man, and Cybernetics (SMC), 2013 IEEE International
+  Conference on\/}. IEEE, pages 2067--2072.
+
+\bibitem[{Tomlein et~al.(2012)Tomlein, Bielik, Kr{\'a}tky, Mitr{\'\i}k, Barla,
+  and Bielikov{\'a}}]{tomlein2012advanced}
+Michal Tomlein, Pavol Bielik, Peter Kr{\'a}tky, Stefan Mitr{\'\i}k, Michal
+  Barla, and M{\'a}ria Bielikov{\'a}. 2012.
+\newblock Advanced pedometer for smartphone-based activity tracking.
+\newblock In {\em HEALTHINF\/}. pages 401--404.
+
+\bibitem[{Zaremba et~al.(2014)Zaremba, Sutskever, and
+  Vinyals}]{zaremba2014recurrent}
+Wojciech Zaremba, Ilya Sutskever, and Oriol Vinyals. 2014.
+\newblock Recurrent neural network regularization.
+\newblock {\em arXiv preprint arXiv:1409.2329\/} .
+
+\end{thebibliography}

@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: acl2015.aux
+The style file: acl_natbib.bst
+Database file #1: acl2015.bib
+Warning--empty journal in gers1999learning
+You've used 18 entries,
+            2936 wiz_defined-function locations,
+            703 strings with 8361 characters,
+and the built_in function-call counts, 13632 in all, are:
+= -- 1105
+> -- 603
+< -- 20
++ -- 201
+- -- 177
+* -- 928
+:= -- 1918
+add.period$ -- 82
+call.type$ -- 18
+change.case$ -- 171
+chr.to.int$ -- 18
+cite$ -- 19
+duplicate$ -- 1096
+empty$ -- 1075
+format.name$ -- 245
+if$ -- 2867
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 210
+newline$ -- 93
+num.names$ -- 72
+pop$ -- 468
+preamble$ -- 1
+purify$ -- 131
+quote$ -- 0
+skip$ -- 423
+stack$ -- 0
+substring$ -- 621
+swap$ -- 557
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 162
+warning$ -- 1
+while$ -- 94
+width$ -- 0
+write$ -- 242
+(There was 1 warning)
