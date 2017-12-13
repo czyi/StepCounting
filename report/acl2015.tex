@@ -44,10 +44,61 @@
 \date{}
 
 \begin{document}
+\onecolumn
+
+{
+    {\setcounter{page}{0}\renewcommand{\thepage}{\roman{page}}}
+  
+%   % extend down to the page number area (UCSC), which is 1.25in 
+%   % from the bottom
+  \enlargethispage{\footskip}
+
+%    \null\vfil
+  \begin{center}
+  \Large
+    UNIVERSITY OF CALIFORNIA \par
+    \smallskip
+    {\expandafter\uppercase\expandafter{SANTA CRUZ}} \par
+    \bigskip
+    {\bfseries {\expandafter\uppercase\expandafter{LSTM Recurrent Network for Step Counting based on WeAllWork Dataset}} \par}
+    \medskip
+    A report submitted in partial satisfaction of the \par
+    requirements for the degree of \par
+    \bigskip
+    {\expandafter\expandafter{MASTER OF SCIENCE}} \par
+    \bigskip
+    in \par
+    \bigskip
+    {\expandafter\uppercase\expandafter{COMPUTER SCIENCE}} \par
+    \bigskip
+    by \par
+    \bigskip
+    {\bfseries Ziyi Chen} \par
+    \bigskip
+    December 2017 \par
+  \end{center}
+% \setcounter{footnote}{0}
+
+\vfill
+\begin{center}
+% \fmfont
+\Large
+\hfill \parbox{3in}{The Report of {Ziyi Chen}\\ is approved:} \\
+\bigskip \bigskip \medskip
+\hfill\rule{2.6in}{0.5pt}\\
+\hfill\makebox[2.6in][l]{Professor Roberto Manduchi, Chair }\\
+\bigskip \medskip
+\hfill\rule{2.6in}{0.5pt}\\
+\hfill\makebox[2.6in][l]{Professor Luca de Alfaro, Reader}\\
+\bigskip \smallskip
+\end{center}
+
+
+
 \maketitle
 \begin{abstract}
 
-Smartphone offers various sensors such as accelerometers and gyroscope that can be used for pedometer and environment-related events. This paper trains an LSTM recurrent network for counting the number of steps taken by both blind and sighted users, based on WeAllWork Dataset. The model is built separately for blind volunteers using long canes and guided dog as well as sighted volunteer for the Leave-One-Out training modality.
+Smartphone offers various sensors such as accelerometers and gyroscope that can be used for pedometer and environment-related events. This paper trains an LSTM recurrent network for counting the number of steps taken by both blind and sighted users, based on annotated smartphone sensor data from WeAllWork Dataset. The models were built for sighted people, blind people with white cane and guide dog separately for Leave-One-Out training modality. It achieved 5\% overcount and undercount rate.
 
 \end{abstract}
 
@@ -57,7 +108,7 @@ Originally used by sports and physical activity tracking, pedometers are now bec
 
 With the increasing ubiquity of smartphones, users are now carrying around a plenty of sensors like accelerometers, gyroscope, magnetometer with them wherever they go. There are various of step counting apps in smartphones. Step counters can also be used for estimating the distance and the position in indoor pedestrian navigation systems, which is especially helpful not only for blind people, but also for sighted people who need directional information in unfamiliar places.
 
-This paper proposes an LSTM model trained by indoor walking sensor data of iPhone and annotated data of cpro from WeallWalk dataset as training data and label, to predict left or right steps and calculate the count of steps. The cpro is attached to the shoes so it can provide precise times of heel strike. In the dataset, blind volunteers using long canes and guided dogs as well as sighted volunteers have different features of gaits, so we separately build the model and calculate the error rate of three metrics. In practice, pedometers don't have any annotated data from a new user, so we apply leave one person out pedometers to test the accuracy of our model. Three error metrics splitting intervals differently estimate the overcount and undercount of steps. We also try different parameters for the LSTM models such as timesteps and training steps to compare the difference of output.
+This paper proposes an LSTM model trained by indoor walking sensor data of iPhone and annotated data of cpro from WeallWalk dataset as training data and label, to predict left or right steps and calculate the count of steps. The cpro is attached to the shoes so it can provide precise times of heel strike. In the dataset, blind volunteers using long canes and guided dogs as well as sighted volunteers have different features of gaits, so we build the model separately for each group and calculate the error rate of three metrics. In practice, pedometers don't have any annotated data from a new user, so we also apply leave one person out pedometers to test the accuracy of our model. Three error metrics splitting intervals differently estimate the overcount and undercount of steps. We also try different parameters for the LSTM models such as timesteps and training steps to compare the difference of output. The model achieved 1\% overcount and undercount rate for mixed training data and 5\% for Leave-One-Out training modality.
 
 
 
@@ -75,8 +126,8 @@ This paper proposes an LSTM model trained by indoor walking sensor data of iPhon
 
 Automatic step counting has received substantial attention from both research and commercial. There is a wealth of studies on the use of inertial sensors for detecting and characterizing walk-related activities. Pedometers are usually portable and electronic or electromechanical. It can be embedded in shoes, in a smartwatch, in a smartphone, and attached to one’s ankles or hung on the belt.
 
-\cite{tomlein2012advanced} introduces step detection and intelligent detection of cheating based on smartphone sensors.
-\cite{naqvib2012step} presents a method for counting the number of steps taken by a user, while walking at any variable speed, using the smartphone-based accelerometer.
+%\cite{tomlein2012advanced} introduces step detection and intelligent detection of cheating based on smartphone sensors.
+%\cite{naqvib2012step} presents a method for counting the number of steps taken by a user, while walking at any variable speed, using the smartphone-based accelerometer.
 
 \cite{brajdic2013walk} evaluates common walk detection (WD) and step counting (SC) algorithms applied to smartphone sensor data. The results favor the use of standard deviation thresholding (WD) and windowed peak detection (SC) with error rates of less than 3\%.
 A variety of algorithms have been proposed for stride event detection from inertial sensor time series. Some of these algorithms operate on the accelerometer data, while others use data from the gyros. For example, The Window Peak Detection algorithm (WPD) runs a moving average window on the smoothed accelerometer magnitude to find peaks associated with a heel strike. \cite{alzantot2012uptime} UPTIME (Ubiquitous Pedestrian Tracking usIng Mobile phonEs) uses the de-trended magnitude of acceleration in a finite state machine (FSM), with six states to identify the peaks associated with heel strikes. \cite{mannini2011hidden} HMM-acc trains a Hidden Markov Model (HMM) to discern the different phases during a gait period. 
@@ -174,9 +225,9 @@ Note that the normalized undercount and overcount values obtained by the error m
 
 \begin{figure*}[ht]
 \centering
-\includegraphics[scale=0.5]{error_metric_13_na_step}
-\caption{Error metric 1 and 3 for leave one out of sighted people with regrad to training steps. The error rate of metric 1 is always higher than metric 3.}
-\label{fig:error_metric_13_na_step}
+\includegraphics[scale=0.5]{error_metric_123_na_5fold}
+\caption{Error metric 1, 2 and 3 for leave one out of sighted people.}
+\label{fig:error_metric_123_na_5fold}
 \end{figure*}
 
 
@@ -202,7 +253,7 @@ For mixed train and test data, we apply 10 folds cross-validation. A good sample
 \end{figure}
 
 
-Since there are 6 error values, it difficult to determine a weighted format over each error rate and tell which model is better. So all ten result is shown in picture \ref{fig:error_metric_23_na_10fold}. The result doesn't have much difference from each other. The undercount rate is around 1\% and the overcount rate is less than twice of undercount rate (2\%). The value of error rate is shown in table \ref{label_metric23_sighted}. The error rate is much higher than error rate for metric 2 and 3, the undercount rate is similar top overcount rate (around 20\%) as shown in picture \ref{fig:error_metric_1_na_10fold}. The reason that caused such situation is described in picture \ref{fig:output_small_metric2}. So the error rate of undercount and overcount is similar since when a undercount happened it is likely to cause a overcount.
+Since there are 6 error values, it difficult to determine a weighted format over each error rate and tell which model is better. All ten results are shown in picture \ref{fig:error_metric_23_na_10fold}. The results doesn't have much difference from each other. The undercount rate is around 1\% and the overcount rate is less than twice of undercount rate (2\%). The value of error rate is shown in table \ref{label_metric23_sighted}. The error rate is much higher than error rate for metric 2 and 3, the undercount rate is similar to overcount rate (around 20\%) as shown in picture \ref{fig:error_metric_1_na_10fold}. The reason that caused such situation is described in picture \ref{fig:output_small_metric2}. So the metric 1 error rate of undercount and overcount is similar since when a undercount happened it is likely to cause a overcount.
 
 \begin{figure}[ht]
 \centering
@@ -227,9 +278,10 @@ Since there are 6 error values, it difficult to determine a weighted format over
 \label{fig:error_metric_wc_10fold_test4000}
 \end{figure*}
 
-For leave one person out method, the result is shown in picture \ref{fig:error_metric_2_na_step}. The best result is got after around 6000 steps. When the training step is less than 4000, the function is underfitted, while the training steps are larger than 7000, the function is overfitted. In this case, metric 2 has bad performance as shown in picture \ref{fig:error_metric_2_na_step}. This is because there is an offset around half of each interval as shown in the picture. The offset is good for metric 1 but bad for metric 2. The result for error metric 1 and 3 is shown in \ref{fig:error_metric_13_na_step}. The error rate for step=600 is 2.5\%, and metric 2 undercount rate is 1\%.
+For leave one person out method, the cress validation result is shown in picture \ref{fig:error_metric_123_na_5fold}. In some case, metric 2 has bad performance, this is because there is an offset around half of each interval as shown in the picture  \ref{fig:error_metric_2_na_step}. In the experience, some vaildation sets have overcount and undercount rate less than 0.1\% of metric 3, while less than 1\% for metric 1 or 2. But for other validation set, the overcount rate is extremely high likely 30\% to 60\%. Also, each vaildation set has better performance with models different of different parameters. So I choose the model where each validation sets have average performance and achieve 5\% error rate of metric 3. It may because different people have different gaits.
 
-When the train and test data both contains the sensor data from certain people, then the prediction of left or right feet is quite accurate, so the error (metric 2 and 3) of step counting is small. However, if the sensor data of train and test are from different people, then there would be a certain offset for test data, and the accuracy of left and right foot is low. But the error (metric 1 and 3) is still small since the offset is similar for each heel strikes as shown in picture \ref{fig:output_ex_offset}. It may because different people have different gaits.
+
+When the train and test data both contains the sensor data from certain people, then the prediction of left or right feet is quite accurate, so the error (metric 2 and 3) of step counting is small. However, if the sensor data of train and test are from different people, then there would be a offset for test data, and the accuracy of left and right foot is low. But the error could be small if the offset is similar for each heel strikes as shown in picture \ref{fig:output_ex_offset}. 
 
 \subsection{Blind People with White Canes}
 A white cane is used by many people who are blind or visually impaired. Primarily it aids its user to scan their surroundings for obstacles or orientation marks, but is also helpful for other traffic participants in identifying the user as blind or visually impaired and taking appropriate care.
@@ -269,7 +321,9 @@ metric1                  & undercount & 23.90 & 10.18 \\
 
 \section{Conclusion and Future Work}
 
-We train an LSTM model trained by indoor walking sensor data of iPhone and annotated data of cpro from WeallWalk dataset as training data and label, to predict left or right steps and calculate the count of steps. The cpro is attached to the shoes so it can provide precise times of heel strike. In the dataset, blind volunteers using long canes and guided dogs as well as sighted volunteers have different features of gaits, so we separately build the model and calculate the error rate of three metrics. In practice, pedometers don't have any annotated data from a new user, so we apply leave one person out pedometers to test the accuracy of our model. There are three error metrics splitting intervals differently to estimate the overcount and undercount of steps. We also try different parameters for the LSTM models such as timesteps and training steps to compare the difference of output. As shown in picture \ref{fig:overcount} and picture \ref{fig:undercount}, simple classify left and right step by 0.5 may cause the overcount or undercount. So we can use a better way to distinguish left step from the right step. In this paper, we only use the data of straight segments, avoiding turn segment and other features. We could consider about turn data and feature motions. We now only use rotation rate and user acceleration as input, we can also try more sensor data in future.
+We train an LSTM model using sensor data of iPhone annotated by cpro from WeallWalk dataset, to predict left or right steps for step counting. In the dataset, blind volunteers using long canes and guided dogs, sighted volunteers have different features of gaits, so we separately build the model and calculate the error rate of three metrics. We aslo apply leave one person out pedometers to test the accuracy of our model. There are three error metrics splitting intervals differently to estimate the overcount and undercount of steps. We also try different parameters for the LSTM models such as timesteps and training steps to compare the difference of output.  The model achieved 1\% overcount and undercount rate for mixed training data and 5\% for Leave-One-Out training modality.
+
+As shown in picture \ref{fig:overcount} and picture \ref{fig:undercount}, simple classify left and right step by 0.5 may cause the overcount or undercount. So we can use a better way to distinguish left step from the right step. In this paper, we only use the data of straight segments, avoiding turn segment and other features. We could consider about turn data and feature motions. We now only use rotation rate and user acceleration as input, we can also try more sensor data in future.
 
 \begin{figure}[ht]
 \centering

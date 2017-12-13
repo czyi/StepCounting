@@ -1,74 +1,172 @@
-0
-t
+timestep=80
+lr=0.03
+2 no drop
+
+
+cv0
+step=2000?
 error : 
-total undercount metric 1:	 0.11007268951194185
-total overcount metric 1:	 0.2580477673935618
-total undercount metric 2:	 0.04101765316718588
-total overcount metric 2:	 0.23208722741433022
+total undercount metric 1:	 0.038179916317991634
+total overcount metric 1:	 0.1893305439330544
+total undercount metric 2:	 0.10198744769874477
+total overcount metric 2:	 0.25313807531380755
 total undercount metric 3:	 0.0
-total overcount metric 3:	 0.19106957424714435
+total overcount metric 3:	 0.15115062761506276
 
-v
-
-
-
-
-1
-t
+3000
 error : 
-total undercount metric 1:	 0.19158878504672897
-total overcount metric 1:	 0.18276220145379024
-total undercount metric 2:	 0.002596053997923157
-total overcount metric 2:	 0.027518172377985463
-total undercount metric 3:	 0.001557632398753894
-total overcount metric 3:	 0.0264797507788162
-
-v
+total undercount metric 1:	 0.10564853556485355
+total overcount metric 1:	 0.18357740585774057
+total undercount metric 2:	 0.14382845188284518
+total overcount metric 2:	 0.2217573221757322
+total undercount metric 3:	 0.0005230125523012552
+total overcount metric 3:	 0.07845188284518828
+(
 error : 
-total undercount metric 1:	 0.08759124087591241
-total overcount metric 1:	 0.2962287104622871
-total undercount metric 2:	 0.13442822384428224
-total overcount metric 2:	 0.3771289537712895
-total undercount metric 3:	 0.004257907542579075
-total overcount metric 3:	 0.24695863746958638
+total undercount metric 1:	 0.12186192468619247
+total overcount metric 1:	 0.1354602510460251
+total undercount metric 2:	 0.1553347280334728
+total overcount metric 2:	 0.16893305439330544
+total undercount metric 3:	 0.007322175732217573
+total overcount metric 3:	 0.02092050209205021
+)
 
-
-2
-t
+4000?
 error : 
-total undercount metric 1:	 0.18639667705088267
-total overcount metric 1:	 0.17133956386292834
-total undercount metric 2:	 0.004153686396677051
-total overcount metric 2:	 0.021287642782969886
-total undercount metric 3:	 0.002596053997923157
-total overcount metric 3:	 0.01973001038421599
+total undercount metric 1:	 0.01202928870292887
+total overcount metric 1:	 0.10460251046025104
+total undercount metric 2:	 0.075836820083682
+total overcount metric 2:	 0.1684100418410042
+total undercount metric 3:	 0.0005230125523012552
+total overcount metric 3:	 0.09309623430962342
 
-v
+cv1
+2000
 error : 
-total undercount metric 1:	 0.1037037037037037
-total overcount metric 1:	 0.7105820105820105
-total undercount metric 2:	 0.02857142857142857
-total overcount metric 2:	 0.6777777777777778
-total undercount metric 3:	 0.0
-total overcount metric 3:	 0.6492063492063492
+total undercount metric 1:	 0.11206896551724138
+total overcount metric 1:	 0.36637931034482757
+total undercount metric 2:	 0.07389162561576355
+total overcount metric 2:	 0.32820197044334976
+total undercount metric 3:	 0.0006157635467980296
+total overcount metric 3:	 0.25492610837438423
 
-
-3
-t
+3000
 error : 
-total undercount metric 1:	 0.1770508826583593
-total overcount metric 1:	 0.16978193146417445
-total undercount metric 2:	 0.002596053997923157
-total overcount metric 2:	 0.01921079958463136
-total undercount metric 3:	 0.001557632398753894
-total overcount metric 3:	 0.018172377985462097
-
-
-v
+total undercount metric 1:	 0.15886699507389163
+total overcount metric 1:	 0.4975369458128079
+total undercount metric 2:	 0.06342364532019705
+total overcount metric 2:	 0.4020935960591133
+total undercount metric 3:	 0.0006157635467980296
+total overcount metric 3:	 0.3392857142857143
+(
 error : 
-total undercount metric 1:	 0.10740402193784278
-total overcount metric 1:	 0.11425959780621572
-total undercount metric 2:	 0.009140767824497258
-total overcount metric 2:	 0.027422303473491772
-total undercount metric 3:	 0.005941499085923218
-total overcount metric 3:	 0.024223034734917732
+total undercount metric 1:	 0.19458128078817735
+total overcount metric 1:	 0.32142857142857145
+total undercount metric 2:	 0.10714285714285714
+total overcount metric 2:	 0.23399014778325122
+total undercount metric 3:	 0.005541871921182266
+total overcount metric 3:	 0.13238916256157635
+)
+
+
+cv2
+6000
+total undercount metric 1:	 0.25159574468085105
+total overcount metric 1:	 0.4218085106382979
+total undercount metric 2:	 0.21648936170212765
+total overcount metric 2:	 0.38670212765957446
+total undercount metric 3:	 0.002127659574468085
+total overcount metric 3:	 0.1723404255319149
+(
+error : 
+total undercount metric 1:	 0.2702127659574468
+total overcount metric 1:	 0.31648936170212766
+total undercount metric 2:	 0.24308510638297873
+total overcount metric 2:	 0.28936170212765955
+total undercount metric 3:	 0.02553191489361702
+total overcount metric 3:	 0.07180851063829788
+)
+
+cv3
+4000
+error : 
+total undercount metric 1:	 0.28394495412844034
+total overcount metric 1:	 0.38440366972477064
+total undercount metric 2:	 0.054587155963302755
+total overcount metric 2:	 0.15504587155963304
+total undercount metric 3:	 0.003669724770642202
+total overcount metric 3:	 0.10412844036697248
+(
+error : 
+total undercount metric 1:	 0.29174311926605506
+total overcount metric 1:	 0.30963302752293576
+total undercount metric 2:	 0.06697247706422019
+total overcount metric 2:	 0.08486238532110092
+total undercount metric 3:	 0.01926605504587156
+total overcount metric 3:	 0.037155963302752296
+)
+
+
+5000
+error : 
+total undercount metric 1:	 0.394954128440367
+total overcount metric 1:	 0.4004587155963303
+total undercount metric 2:	 0.22247706422018348
+total overcount metric 2:	 0.2279816513761468
+total undercount metric 3:	 0.055504587155963306
+total overcount metric 3:	 0.06100917431192661
+(
+error : 
+total undercount metric 1:	 0.4261467889908257
+total overcount metric 1:	 0.22018348623853212
+total undercount metric 2:	 0.29724770642201837
+total overcount metric 2:	 0.09128440366972478
+total undercount metric 3:	 0.21972477064220183
+total overcount metric 3:	 0.013761467889908258
+)
+
+6000
+error : 
+total undercount metric 1:	 0.3651376146788991
+total overcount metric 1:	 0.42935779816513764
+total undercount metric 2:	 0.14724770642201834
+total overcount metric 2:	 0.21146788990825688
+total undercount metric 3:	 0.03302752293577982
+total overcount metric 3:	 0.09724770642201835
+(
+error : 
+total undercount metric 1:	 0.39174311926605504
+total overcount metric 1:	 0.32889908256880734
+total undercount metric 2:	 0.17844036697247706
+total overcount metric 2:	 0.11559633027522936
+total undercount metric 3:	 0.10321100917431193
+total overcount metric 3:	 0.04036697247706422
+)
+
+cv4
+3000
+error : 
+total undercount metric 1:	 0.2475868725868726
+total overcount metric 1:	 0.2171814671814672
+total undercount metric 2:	 0.3141891891891892
+total overcount metric 2:	 0.28378378378378377
+total undercount metric 3:	 0.07722007722007722
+total overcount metric 3:	 0.04681467181467181
+(
+error : 
+total undercount metric 1:	 0.27702702702702703
+total overcount metric 1:	 0.07432432432432433
+total undercount metric 2:	 0.3310810810810811
+total overcount metric 2:	 0.12837837837837837
+total undercount metric 3:	 0.22345559845559845
+total overcount metric 3:	 0.020752895752895753
+)
+
+4000
+error : 
+total undercount metric 1:	 0.14913127413127414
+total overcount metric 1:	 0.3305984555984556
+total undercount metric 2:	 0.29922779922779924
+total overcount metric 2:	 0.4806949806949807
+total undercount metric 3:	 0.010135135135135136
+total overcount metric 3:	 0.1916023166023166
