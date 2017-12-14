@@ -148,17 +148,17 @@ We propose an LSTM model trained with indoor walking sensor data from iPhone for
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=1]{input2}
-\caption{Input (green) and output (pink) examples for LSTM. Use previous 0 to t number records of sensor data (green blocks) to predict the last t siginal (last pink block). The intermediate outputs (light pink) would be regards as output for first (t-1) records at beginning of each segment since they don't have enough previous record. }
+\caption{Input (green) and output (pink) examples for LSTM. Use recorded sensor data from t previous timesteps ago to current time (green blocks, containing t records) to predict the current step (last pink block, last output of the lstm model). The intermediate outputs (light pink) of the model would be regards as output for first (t-1) records at beginning of each segment since they don't have enough previous record. }
 \label{fig:batch_sensor_data}
 \end{figure*}
 
-We use two kinds of file from the dataset. The first type is the CSV file of iPhone sensor data as input. It contains records of all iPhone sensors. There are 39 columns of sensor data and some of them are more useful than others such as rotation rate and user acceleration.
+We use two kinds of file from the dataset. The first type is the CSV files of iPhone sensor data.  Each CSV file contians recorded one iPhone sensor data per path and per person. There are 39 columns of sensor data and some of them are more useful than others such as rotation rate and user acceleration. So we use the six sensor data (rotationRateX, rotationRateY, rotationRateZ,  userAccelerationX, userAccelerationY, userAccelerationZ) as input. 
 
-The second type is the XML files that contain annotated ground truth data for all the paths walked by all the participants as labels. Each file contains start and end times for each segment the user walked through and feature information like the left or right foot as well as direction. We only train and test the step detection algorithms on data acquired while traversing straight segments in the paths, where gait is assumed to be regular, removing segments marked as features. 
+The second type is the XML files containing annotated ground truth data for all the paths walked by all the participants. Each file contains start time, end times and direction for each segment the user walked through . For each segment, the time and foot of each step is recorded, and special situation liking moving to the wall is also marked as feature with start time, end time and detailed events. We only train and test the step counting system on sensor data when participants traverse straight segments in the paths, where gait patterns is assumed to be regular, and remove time slots marked as feature. 
 
-Since the XML files only contain heel strike times, we cannot use it as labels directly. If we regard heel strike times as 1 and other times as 0, then the labels are unbalanced. So we apply the same sampling rate as CSV files (25Hz) and transform the XML file to binary signal in which left steps trigger the signal from 0 to 1 and right steps trigger the signal from 1 to 0.
+Since the XML files only contain heel strike times, we cannot use it as labels directly. If we regard heel strike times as 1 and other times as 0, then the labels are unbalanced. So we transform the XML file to binary signal in which left steps trigger the signal from 0 to 1 and right steps trigger the signal from 1 to 0 as shown in picture \ref{fig:ground_truth}.
 
-As shown in picture \ref{fig:ground_truth}, the light color line of strike time is the original data from XML file. It is transformed to redline which is binary signal. We also remove the turn data(light yellow background part) and feature data(light red background part). Then we windowed the data for corresponding sensor data and labels.
+Finally we windowed the data (window size is equal to timesteps) for corresponding sensor data and ground truth signals to generate the training data and labels.
 
 
 \subsection{LSTM Model}
@@ -172,14 +172,14 @@ Three multiplicative units called the input door, forgotten door and output door
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{LSTM3}
-\caption{Two layer LSTM recurrent network. Each green block is a LSTM block. Blue circle D(t) represent for sensor data recorded at time t, s is inner lstm state, pink circle F is the output signal.}
+\caption{Two layer LSTM recurrent network. Each green block is a LSTM block. Blue circle D(t) represent for sensor data recorded at time t, s is inner lstm state, pink circle F is the output signal. Each LSTM cell receives the current sensor input and state outputed by previous cell (initial state is 0), and ouput a state  and a output.}
 \label{fig:LSTM}
 \end{figure}
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.6]{error_metric}
-\caption{Example of three error metrics. Assume above plot is a entire segement. Error metric 1 (read line) split intervals exactly at each heel strike times. Error metric 2 (blue line) split intervals exactly at middle of every two continues heel strike times. Error metric 3 calculate undercount and overcount rate for the entire segment.}
+\caption{An example of three error metrics. Assume above plot is a entire segement. Error metric 1 (read line) split intervals exactly at each heel strike time. Error metric 2 (blue line) split intervals at middle of every two continues heel strike times. Error metric 3 calculate undercount and overcount rate for the entire segment.}
 \label{fig:error_metric}
 \end{figure*}
 
