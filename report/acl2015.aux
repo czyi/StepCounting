@@ -1,32 +1,76 @@
 \relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{wiki:pedometer}
 \citation{brajdic2013walk}
 \citation{tomlein2012advanced}
 \citation{naqvib2012step}
 \citation{edel2015advanced}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background and Related Work}{1}{section.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Step Counting}{1}{subsection.2.1}}
 \citation{haegele2015validation}
 \citation{holbrook2011validation}
 \citation{flores2016weallwalk}
-\newlabel{fig:ground_truth}{{1}{2}}
-\newlabel{fig:batch_sensor_data}{{2}{3}}
-\newlabel{fig:LSTM}{{3}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Example heel strike times of T1\_ID1\_WC.xml from 2.4s to 34.4s. The first step is left feet at 5.4761s. A feature motion (the participant walked into the wall, stopped, and moved to the left) happened from 9.041862s to 10.041862s. Two turn motions, turn east to south from 13.1752s to 20.7419 and turn south to east from 30.0419s to 39.1419s occured. All data before first step, feature data and turn data are removed.}}{2}{figure.1}}
+\newlabel{fig:ground_truth}{{1}{2}{Example heel strike times of T1\_ID1\_WC.xml from 2.4s to 34.4s. The first step is left feet at 5.4761s. A feature motion (the participant walked into the wall, stopped, and moved to the left) happened from 9.041862s to 10.041862s. Two turn motions, turn east to south from 13.1752s to 20.7419 and turn south to east from 30.0419s to 39.1419s occured. All data before first step, feature data and turn data are removed}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}WeAllWalk Dataset}{2}{subsection.2.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Implementation}{2}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Data Preprocess}{2}{subsection.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Input (green) and output (pink) example for LSTM. Use previous 0 to t number records of sensor data (green blocks) to predict the last t siginal (last pink block). The intermediate outputs (light pink) would be regards as output for first (t-1) records at beginning of each segment since they don't have enough previous record. }}{3}{figure.2}}
+\newlabel{fig:batch_sensor_data}{{2}{3}{Input (green) and output (pink) example for LSTM. Use previous 0 to t number records of sensor data (green blocks) to predict the last t siginal (last pink block). The intermediate outputs (light pink) would be regards as output for first (t-1) records at beginning of each segment since they don't have enough previous record}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}LSTM Model}{3}{subsection.3.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Two layer LSTM recurrent network. Each green block is a LSTM block. Blue circle D(t) represent for sensor data recorded at time t, s is inner lstm state, pink circle F is the output signal.}}{3}{figure.3}}
+\newlabel{fig:LSTM}{{3}{3}{Two layer LSTM recurrent network. Each green block is a LSTM block. Blue circle D(t) represent for sensor data recorded at time t, s is inner lstm state, pink circle F is the output signal}{figure.3}{}}
 \citation{flores2016weallwalk}
-\newlabel{fig:error_metric}{{4}{4}}
-\newlabel{fig:output_sighted}{{5}{5}}
-\newlabel{fig:error_metric_23_na_10fold}{{6}{5}}
-\newlabel{fig:error_metric_123_na_5fold}{{7}{6}}
-\newlabel{fig:output_ex_offset}{{8}{6}}
-\newlabel{fig:error_metric_2_na_step}{{9}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Example of three error metrics. Assume above plot is a entire segement. Error metric 1 (read line) split intervals exactly at each heel strike times. Error metric 2 (blue line) split intervals exactly at middle of every two continues heel strike times. Error metric 3 calculate undercount and overcount rate for the entire segment.}}{4}{figure.4}}
+\newlabel{fig:error_metric}{{4}{4}{Example of three error metrics. Assume above plot is a entire segement. Error metric 1 (read line) split intervals exactly at each heel strike times. Error metric 2 (blue line) split intervals exactly at middle of every two continues heel strike times. Error metric 3 calculate undercount and overcount rate for the entire segment}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Error Metrics}{4}{subsection.3.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experience}{4}{section.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Sample output of mixed data for sighted people. The origin output signal (blue line) swings near 0 or 1. The round signal (yellow line) is quite similar to the ground truth data (red line).}}{5}{figure.5}}
+\newlabel{fig:output_sighted}{{5}{5}{Sample output of mixed data for sighted people. The origin output signal (blue line) swings near 0 or 1. The round signal (yellow line) is quite similar to the ground truth data (red line)}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Error metric 2 and 3 for 10 fold cross validation of mixed data for sighted people.The error rate of metric 2 is always higher than metric 3. The undercount error (blue blocks) is less than overcount error (grey blocks). Detailed values is shown in table \ref  {label_metric23_sighted}.}}{5}{figure.6}}
+\newlabel{fig:error_metric_23_na_10fold}{{6}{5}{Error metric 2 and 3 for 10 fold cross validation of mixed data for sighted people.The error rate of metric 2 is always higher than metric 3. The undercount error (blue blocks) is less than overcount error (grey blocks). Detailed values is shown in table \ref {label_metric23_sighted}}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Sighted people}{5}{subsection.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Error metric 1, 2 and 3 for leave one out of sighted people.}}{6}{figure.7}}
+\newlabel{fig:error_metric_123_na_5fold}{{7}{6}{Error metric 1, 2 and 3 for leave one out of sighted people}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Sample output of offset. In this case, error metric 1 works better than error metric 2.}}{6}{figure.8}}
+\newlabel{fig:output_ex_offset}{{8}{6}{Sample output of offset. In this case, error metric 1 works better than error metric 2}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Error metric 1 and 3 for 10 fold cross validation of sighted people.The error rate of metric 1 is always higher than metric 3 with regrad to training steps.}}{6}{figure.9}}
+\newlabel{fig:error_metric_2_na_step}{{9}{6}{Error metric 1 and 3 for 10 fold cross validation of sighted people.The error rate of metric 1 is always higher than metric 3 with regrad to training steps}{figure.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Blind People with a long cane}{6}{subsection.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Blind walkers using a guide dog}{6}{subsection.4.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion and Future Work}{6}{section.5}}
 \citation{*}
 \bibstyle{acl_natbib}
 \bibdata{acl2015}
 \bibcite{ahmetovic2016navcog}{Ahmetovic et\nobreakspace  {}al.(2016)Ahmetovic, Gleason, Ruan, Kitani, Takagi, and Asakawa}
 \bibcite{ailisto2005identifying}{Ailisto et\nobreakspace  {}al.(2005)Ailisto, Lindholm, Mantyjarvi, Vildjiounaite, and Makela}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Leave one out - Valid Error for Blind People with a long cane}}{7}{figure.10}}
+\newlabel{fig:error_metric_wc_10fold_valid4000}{{10}{7}{Leave one out - Valid Error for Blind People with a long cane}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Leave one out - Test Error for Blind People with a long cane}}{7}{figure.11}}
+\newlabel{fig:error_metric_wc_10fold_test4000}{{11}{7}{Leave one out - Test Error for Blind People with a long cane}{figure.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Error of blind people with guide dog}}{7}{table.1}}
+\newlabel{my-label}{{1}{7}{Error of blind people with guide dog}{table.1}{}}
 \bibcite{alzantot2012uptime}{Alzantot and Youssef(2012)}
-\newlabel{fig:error_metric_wc_10fold_valid4000}{{10}{7}}
-\newlabel{fig:error_metric_wc_10fold_test4000}{{11}{7}}
-\newlabel{my-label}{{1}{7}}
 \bibcite{brajdic2013walk}{Brajdic and Harle(2013)}
 \bibcite{case2015accuracy}{Case et\nobreakspace  {}al.(2015)Case, Burwick, Volpp, and Patel}
+\bibcite{wiki:pedometer}{contributors(2017)}
 \bibcite{coughlan2006cell}{Coughlan et\nobreakspace  {}al.(2006)Coughlan, Manduchi, and Shen}
 \bibcite{edel2015advanced}{Edel and K{\"o}ppe(2015)}
 \bibcite{flores2016weallwalk}{Flores and Manduchi(2016)}
@@ -34,18 +78,27 @@
 \bibcite{haegele2015validation}{Haegele and Porretta(2015)}
 \bibcite{hallemans2010low}{Hallemans et\nobreakspace  {}al.(2010)Hallemans, Ortibus, Meire, and Aerts}
 \bibcite{holbrook2011validation}{Holbrook et\nobreakspace  {}al.(2011)Holbrook, Stevens, Kang, and Morgan}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Sample output of blind people with guide dog.}}{8}{figure.12}}
+\newlabel{fig:blind_gd}{{12}{8}{Sample output of blind people with guide dog}{figure.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Error metric 2 and 3 for 10 fold cross validation of sighted people}}{8}{table.2}}
+\newlabel{label_metric23_sighted}{{2}{8}{Error metric 2 and 3 for 10 fold cross validation of sighted people}{table.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Sample of undercount.}}{8}{figure.13}}
+\newlabel{fig:undercount}{{13}{8}{Sample of undercount}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Sample of overcount.}}{8}{figure.14}}
+\newlabel{fig:overcount}{{14}{8}{Sample of overcount}{figure.14}{}}
 \bibcite{jayalath2013gyroscope}{Jayalath et\nobreakspace  {}al.(2013)Jayalath, Abhayasinghe, and Murray}
 \bibcite{mannini2011hidden}{Mannini and Sabatini(2011)}
 \bibcite{naqvib2012step}{Naqvib et\nobreakspace  {}al.(2012)Naqvib, Kumar, Chauhan, and Sahni}
-\newlabel{fig:blind_gd}{{12}{8}}
-\newlabel{label_metric23_sighted}{{2}{8}}
-\newlabel{fig:undercount}{{13}{8}}
-\newlabel{fig:overcount}{{14}{8}}
 \bibcite{oshin2013ersp}{Oshin and Poslad(2013)}
 \bibcite{tomlein2012advanced}{Tomlein et\nobreakspace  {}al.(2012)Tomlein, Bielik, Kr{\'a}tky, Mitr{\'\i }k, Barla, and Bielikov{\'a}}
 \bibcite{zaremba2014recurrent}{Zaremba et\nobreakspace  {}al.(2014)Zaremba, Sutskever, and Vinyals}
-\newlabel{fig:output_small_metric2}{{15}{9}}
-\newlabel{fig:error_metric_1_na_10fold}{{16}{9}}
-\newlabel{fig:output_wc_1}{{17}{10}}
-\newlabel{fig:output_wc_2}{{18}{10}}
-\newlabel{my-label}{{3}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Bad sample for error metric 1. The green line splits the intervals of error metric 1. There are random offset between actual strikes times and predicted strike times. In this case, the first, third and fifth interval has one overcount, second and fourth interval has one undercount.}}{9}{figure.15}}
+\newlabel{fig:output_small_metric2}{{15}{9}{Bad sample for error metric 1. The green line splits the intervals of error metric 1. There are random offset between actual strikes times and predicted strike times. In this case, the first, third and fifth interval has one overcount, second and fourth interval has one undercount}{figure.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Error metric 1 for 10 fold cross validation for sighted people. The error rate is much higher than error rate for metric 2 and 3 as shown in picture. The reason that caused such situation is described in picture.}}{9}{figure.16}}
+\newlabel{fig:error_metric_1_na_10fold}{{16}{9}{Error metric 1 for 10 fold cross validation for sighted people. The error rate is much higher than error rate for metric 2 and 3 as shown in picture. The reason that caused such situation is described in picture}{figure.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Sample output of blind people with long cane.}}{10}{figure.17}}
+\newlabel{fig:output_wc_1}{{17}{10}{Sample output of blind people with long cane}{figure.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Sample output of blind people with long cane.}}{10}{figure.18}}
+\newlabel{fig:output_wc_2}{{18}{10}{Sample output of blind people with long cane}{figure.18}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Error mertric 1, 2 and 3 for blind walkers using a long cane}}{10}{table.3}}
+\newlabel{my-label}{{3}{10}{Error mertric 1, 2 and 3 for blind walkers using a long cane}{table.3}{}}
