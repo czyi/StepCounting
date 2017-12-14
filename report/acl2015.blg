@@ -4,45 +4,45 @@ The top-level auxiliary file: acl2015.aux
 The style file: acl_natbib.bst
 Database file #1: acl2015.bib
 Warning--empty journal in gers1999learning
-You've used 19 entries,
+You've used 21 entries,
             2936 wiz_defined-function locations,
-            709 strings with 8525 characters,
-and the built_in function-call counts, 14063 in all, are:
-= -- 1142
-> -- 614
-< -- 21
-+ -- 205
-- -- 180
-* -- 952
-:= -- 1988
-add.period$ -- 87
-call.type$ -- 19
-change.case$ -- 178
-chr.to.int$ -- 19
-cite$ -- 20
-duplicate$ -- 1133
-empty$ -- 1112
-format.name$ -- 249
-if$ -- 2954
-int.to.chr$ -- 1
+            716 strings with 8764 characters,
+and the built_in function-call counts, 14884 in all, are:
+= -- 1216
+> -- 636
+< -- 23
++ -- 214
+- -- 186
+* -- 980
+:= -- 2128
+add.period$ -- 97
+call.type$ -- 21
+change.case$ -- 192
+chr.to.int$ -- 20
+cite$ -- 22
+duplicate$ -- 1204
+empty$ -- 1177
+format.name$ -- 257
+if$ -- 3119
+int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 217
-newline$ -- 99
-num.names$ -- 76
-pop$ -- 481
+missing$ -- 231
+newline$ -- 111
+num.names$ -- 84
+pop$ -- 507
 preamble$ -- 1
-purify$ -- 136
+purify$ -- 146
 quote$ -- 0
-skip$ -- 435
+skip$ -- 462
 stack$ -- 0
-substring$ -- 634
-swap$ -- 572
+substring$ -- 660
+swap$ -- 598
 text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 171
+type$ -- 189
 warning$ -- 1
-while$ -- 97
+while$ -- 103
 width$ -- 0
-write$ -- 256
+write$ -- 284
 (There was 1 warning)

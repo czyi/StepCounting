@@ -19,7 +19,7 @@
 \usepackage{acl2015}
 \usepackage{times}
 \usepackage{url}
-\usepackage{hyperref}
+%\usepackage{hyperref}
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -115,7 +115,7 @@ In this paper, we propose an LSTM model trained with indoor walking sensor data 
 
 \subsection{Step Counting}
 
-\begin{figure*}[ht]
+\begin{figure*}[htb]
 \centering
 \includegraphics[scale=0.5]{ground_truth_2}
 \caption{An example of heel strike times in T1\_ID1\_WC.xml from 2.4s to 34.4s. The first step at 5.4761s is a left step. A feature motion (the participant walked into the wall, stopped, and moved to the left) happened during 9.041862s to 10.041862s. Then one turn from east to south and another turn from south to east occured during 13.1752s to 20.7419, and 30.0419s to 39.1419s respectively. Feature data, turn data, and all data recorded before the first step are removed.}
@@ -162,17 +162,16 @@ Finally we windowed the data (window size is equal to timesteps) for correspondi
 
 
 \subsection{LSTM Model}
-Long short-term memory (LSTM) network is a recurrent neural network.
-It is a time-recursive neural network, suitable for processing and prediction the important events of time series in the relatively long delay . LSTM has many applications in science and technology domains. The LSTM-based system can learn tasks such as translating languages, image analysis, speech recognition, controlling chat robots and so on.
+Long short-term memory (LSTM) network is a time-recursive neural network, suitable for processing and prediction the important events of time series in the relatively long delay . LSTM has many applications in science and technology domains. The LSTM-based system can learn tasks such as translating languages, image analysis, speech recognition, controlling chat robots and so on.
 
-The main difference between LSTM and RNN lies in that it adds a "processor" to judge whether the information is useful or not in the algorithm. The structure of this processor is called cell.
-Three multiplicative units called the input door, forgotten door and output door are placed in the cell. When a message enters the LSTM's network, it would determine whether it is useful. Only information that complies with algorithmic certification will remian, and misleading information will be forgotten through forgotten doors.
+Long short-term memory (LSTM) network is a special kind of recurrent neural network (RNN). The main difference between LSTM and RNN lies in that it adds a "processor" to judge whether the information is useful or not in the algorithm. The structure of this processor is called cell.
+Three multiplicative units (input door, forgotten door and output door) are placed in the cell. When a message enters the LSTM network, the system would determine whether the message is useful or not. Only information that complies with algorithmic certification will remian, and misleading information will be forgotten through forgotten doors.
 
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{LSTM3}
-\caption{Two layer LSTM recurrent network. Each green block is a LSTM block. Blue circle D(t) represent for sensor data recorded at time t, s is inner lstm state, pink circle F is the output signal. Each LSTM cell receives the current sensor input and state outputed by previous cell (initial state is 0), and ouput a state  and a output.}
+\caption{Two layer LSTM recurrent network. Each green block is a LSTM block. Blue circle D(t) represent for sensor data recorded at time t, s is inner LSTM state, pink circle F is the output. Each LSTM cell receives the  input of current sensor data and state from previous cell (initial state is 0), and ouput a state  and a output.}
 \label{fig:LSTM}
 \end{figure}
 
@@ -183,7 +182,7 @@ Three multiplicative units called the input door, forgotten door and output door
 \label{fig:error_metric}
 \end{figure*}
 
-We use TensorFlow to implement LSTM network. TensorFlow is an open-source software library that can be used for machine learning applications such as neural networks. It supports both CPU and GPU that can be imported as a python library. TensorFlow uses a data flow graph to represent computation in terms of the dependencies between individual operations. We first define the data flow graph and then create a session to run the graph. The Saver class of TensorFlow can add operations to save and restore variables to and from checkpoints, which map variable names to tensor values.
+We use TensorFlow to implement LSTM network. TensorFlow is an open-source software library that can be used for machine learning applications such as neural networks \cite{wiki:tensorflow}. It supports both CPU and GPU that can be imported as a python library. TensorFlow uses a data flow graph to represent computation in terms of the dependencies between individual operations \cite{tensorflow.org}. We first define the data flow graph and then create a session to run the graph. The saver class can save and restore variables to and from checkpoints by mapping variable names to tensor values.
 
 As shown in picture \ref{fig:LSTM}, a two-layer RNN network with basic LSTM cell is built for training with squared difference loss function. 
 As shown in picture \ref{fig:batch_sensor_data}, the input batch is a list of metrics. Each row of metrics is a list of sensor data at a time. The length of times is called timesteps.

@@ -35,13 +35,17 @@ Meredith~A Case, Holland~A Burwick, Kevin~G Volpp, and Mitesh~S Patel. 2015.
   physical activity data.
 \newblock {\em Jama\/} 313(6):625--626.
 
-\bibitem[{contributors(2017)}]{wiki:pedometer}
-Wikipedia contributors. 2017.
-\newblock \href{https://en.wikipedia.org/wiki/Pedometer}{Pedometer ---
-  {W}ikipedia{,} the free encyclopedia}.
+\bibitem[{contributors(2017{\natexlab{a}})}]{wiki:pedometer}
+Wikipedia contributors. 2017{\natexlab{a}}.
+\newblock Pedometer --- {W}ikipedia{,} the free encyclopedia.
+\newblock \url{https://en.wikipedia.org/wiki/Pedometer}.
 \newblock [Online; accessed 14-December-2017].
-\newblock
-  \href{https://en.wikipedia.org/wiki/Pedometer}{https://en.wikipedia.org/wiki/Pedometer}.
+
+\bibitem[{contributors(2017{\natexlab{b}})}]{wiki:tensorflow}
+Wikipedia contributors. 2017{\natexlab{b}}.
+\newblock Tensorflow --- {W}ikipedia{,} the free encyclopedia.
+\newblock \url{https://en.wikipedia.org/wiki/TensorFlow}.
+\newblock [Online; accessed 14-December-2017].
 
 \bibitem[{Coughlan et~al.(2006)Coughlan, Manduchi, and Shen}]{coughlan2006cell}
 James Coughlan, Roberto Manduchi, and Huiying Shen. 2006.
@@ -110,6 +114,12 @@ Thomas~Olutoyin Oshin and Stefan Poslad. 2013.
 \newblock Ersp: An energy-efficient real-time smartphone pedometer.
 \newblock In {\em Systems, Man, and Cybernetics (SMC), 2013 IEEE International
   Conference on\/}. IEEE, pages 2067--2072.
+
+\bibitem[{TensorFlow(2017)}]{tensorflow.org}
+TensorFlow. 2017.
+\newblock Programmer's guide - graphs and sessions.
+\newblock \url{https://www.tensorflow.org/programmers_guide/graphs}.
+\newblock [Online; accessed 14-December-2017].
 
 \bibitem[{Tomlein et~al.(2012)Tomlein, Bielik, Kr{\'a}tky, Mitr{\'\i}k, Barla,
   and Bielikov{\'a}}]{tomlein2012advanced}
