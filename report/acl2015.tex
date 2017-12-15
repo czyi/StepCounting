@@ -47,52 +47,52 @@
 \begin{document}
 \onecolumn
 
-{
-    {\setcounter{page}{0}\renewcommand{\thepage}{\roman{page}}}
-  
-%   % extend down to the page number area (UCSC), which is 1.25in 
-%   % from the bottom
-  \enlargethispage{\footskip}
-
-%    \null\vfil
-  \begin{center}
-  \Large
-    UNIVERSITY OF CALIFORNIA \par
-    \smallskip
-    {\expandafter\uppercase\expandafter{SANTA CRUZ}} \par
-    \bigskip
-    {\bfseries {\expandafter\uppercase\expandafter{An LSTM Recurrent Network for Step Counting}} \par}
-    \medskip
-    A report submitted in partial satisfaction of the \par
-    requirements for the degree of \par
-    \bigskip
-    {\expandafter\expandafter{MASTER OF SCIENCE}} \par
-    \bigskip
-    in \par
-    \bigskip
-    {\expandafter\uppercase\expandafter{COMPUTER SCIENCE}} \par
-    \bigskip
-    by \par
-    \bigskip
-    {\bfseries Ziyi Chen} \par
-    \bigskip
-    December 2017 \par
-  \end{center}
+%{
+%    {\setcounter{page}{0}\renewcommand{\thepage}{\roman{page}}}
+%  
+%%   % extend down to the page number area (UCSC), which is 1.25in 
+%%   % from the bottom
+%  \enlargethispage{\footskip}
+%
+%%    \null\vfil
+%  \begin{center}
+%  \Large
+%    UNIVERSITY OF CALIFORNIA \par
+%    \smallskip
+%    {\expandafter\uppercase\expandafter{SANTA CRUZ}} \par
+%    \bigskip
+%    {\bfseries {\expandafter\uppercase\expandafter{An LSTM Recurrent Network for Step Counting}} \par}
+%    \medskip
+%    A report submitted in partial satisfaction of the \par
+%    requirements for the degree of \par
+%    \bigskip
+%    {\expandafter\expandafter{MASTER OF SCIENCE}} \par
+%    \bigskip
+%    in \par
+%    \bigskip
+%    {\expandafter\uppercase\expandafter{COMPUTER SCIENCE}} \par
+%    \bigskip
+%    by \par
+%    \bigskip
+%    {\bfseries Ziyi Chen} \par
+%    \bigskip
+%    December 2017 \par
+%  \end{center}
 % \setcounter{footnote}{0}
 
-\vfill
-\begin{center}
-% \fmfont
-\Large
-\hfill \parbox{3in}{The Report of {Ziyi Chen}\\ is approved:} \\
-\bigskip \bigskip \medskip
-\hfill\rule{2.6in}{0.5pt}\\
-\hfill\makebox[2.6in][l]{Professor Roberto Manduchi, Chair }\\
-\bigskip \medskip
-\hfill\rule{2.6in}{0.5pt}\\
-\hfill\makebox[2.6in][l]{Professor Luca de Alfaro, Reader}\\
-\bigskip \smallskip
-\end{center}
+%\vfill
+%\begin{center}
+%% \fmfont
+%\Large
+%\hfill \parbox{3in}{The Report of {Ziyi Chen}\\ is approved:} \\
+%\bigskip \bigskip \medskip
+%\hfill\rule{2.6in}{0.5pt}\\
+%\hfill\makebox[2.6in][l]{Professor Roberto Manduchi, Chair }\\
+%\bigskip \medskip
+%\hfill\rule{2.6in}{0.5pt}\\
+%\hfill\makebox[2.6in][l]{Professor Luca de Alfaro, Reader}\\
+%\bigskip \smallskip
+%\end{center}
 
 
 
@@ -207,7 +207,7 @@ The original result signal is a list of float numbers around 0 to 1. Then we tra
 
 The first metric splits intervals at each real heel strike times and counts the number of predicted steps within each time interval $[T_i, T_{i+1}]$.  If exact one step is detected within each interval, the count of the step is correct. If no step is detected during the interval, then one undercount event happens. If $n$ steps are detected during the interval, then $n-1$ overcount events are recorded. The undercount and overcount rate is the number of undercount events or overcount events divided by the total number of real steps.
 
-The second metric is similar to the first one,  but it  splits intervals at the center point of two adjacent ground-truth heel strike times, and counts the number of predicted steps within each time interval $[[\frac{T_{i-1}+T_i}{2}, \frac{T_i+T_{i+1}}{2}]$. The undercount and overcount rate is calculated in a same way as the first metric does. As shown in Figure \ref{fig:output_small_metric2} at the end of this paper,  the metric can decrease error rate when one step is detected sightly earlier ($t_i<T_i$) and the next step is detected sighted later ($t_{i+1}<T_{i+1}$). In this case, interval $[T_i, T_{i+1}]$ has one undercount event, and interval $[T_{i-1}, T_i]$ and $[T_{i+1}, T_{i+2}]$ have one overcount event.
+The second metric is similar to the first one,  but it  splits intervals at the center point of two adjacent ground-truth heel strike times, and counts the number of predicted steps within each time interval $[\frac{T_{i-1}+T_i}{2}, \frac{T_i+T_{i+1}}{2}]$. The undercount and overcount rate is calculated in a same way as the first metric does. As shown in Figure \ref{fig:output_small_metric2} at the end of this paper,  the metric can decrease error rate when one step is detected sightly earlier ($t_i<T_i$) and the next step is detected sighted later ($t_{i+1}<T_{i+1}$). In this case, interval $[T_i, T_{i+1}]$ has one undercount event, and interval $[T_{i-1}, T_i]$ and $[T_{i+1}, T_{i+2}]$ have one overcount event.
 
 The third metric counts the number of predicted steps during each segment and compares to the number of ground-truth steps during the same segment. If the ground-truth number is larger, then undercount events happen. If the predicted number is larger, then overcount events happen. The undercount and overcount rate is calculated by dividing the sum of undercount events and overcount events by the number of all steps in ground truth. The undercount and overcount rate obtained by the error metric 3 is always smaller than or equal to the corresponding values computed by the metric 1 and 2.
 

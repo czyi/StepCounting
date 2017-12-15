@@ -35,25 +35,13 @@ Meredith~A Case, Holland~A Burwick, Kevin~G Volpp, and Mitesh~S Patel. 2015.
   physical activity data.
 \newblock {\em Jama\/} 313(6):625--626.
 
-\bibitem[{contributors(2017{\natexlab{a}})}]{wiki:pedometer}
-Wikipedia contributors. 2017{\natexlab{a}}.
-\newblock Pedometer --- {W}ikipedia{,} the free encyclopedia.
-\newblock \url{https://en.wikipedia.org/wiki/Pedometer}.
-\newblock [Online; accessed 14-December-2017].
-
-\bibitem[{contributors(2017{\natexlab{b}})}]{wiki:tensorflow}
-Wikipedia contributors. 2017{\natexlab{b}}.
-\newblock Tensorflow --- {W}ikipedia{,} the free encyclopedia.
-\newblock \url{https://en.wikipedia.org/wiki/TensorFlow}.
-\newblock [Online; accessed 14-December-2017].
-
 \bibitem[{Coughlan et~al.(2006)Coughlan, Manduchi, and Shen}]{coughlan2006cell}
 James Coughlan, Roberto Manduchi, and Huiying Shen. 2006.
 \newblock Cell phone-based wayfinding for the visually impaired.
 \newblock In {\em 1st International Workshop on Mobile Vision\/}. pages 1--15.
 
-\bibitem[{Edel and K{\"o}ppe(2015)}]{edel2015advanced}
-Marcus Edel and Enrico K{\"o}ppe. 2015.
+\bibitem[{Edel and Koppe(2015)}]{edel2015advanced}
+Marcus Edel and Enrico Koppe. 2015.
 \newblock An advanced method for pedestrian dead reckoning using blstm-rnns.
 \newblock In {\em Indoor Positioning and Indoor Navigation (IPIN), 2015
   International Conference on\/}. IEEE, pages 1--6.
@@ -66,7 +54,7 @@ German~H Flores and Roberto Manduchi. 2016.
   Conference on Computers and Accessibility\/}. ACM, pages 141--150.
 
 \bibitem[{Gers et~al.(1999)Gers, Schmidhuber, and Cummins}]{gers1999learning}
-Felix~A Gers, J{\"u}rgen Schmidhuber, and Fred Cummins. 1999.
+Felix~A Gers, Jurgen Schmidhuber, and Fred Cummins. 1999.
 \newblock Learning to forget: Continual prediction with lstm .
 
 \bibitem[{Haegele and Porretta(2015)}]{haegele2015validation}
@@ -121,12 +109,24 @@ TensorFlow. 2017.
 \newblock \url{https://www.tensorflow.org/programmers_guide/graphs}.
 \newblock [Online; accessed 14-December-2017].
 
-\bibitem[{Tomlein et~al.(2012)Tomlein, Bielik, Kr{\'a}tky, Mitr{\'\i}k, Barla,
-  and Bielikov{\'a}}]{tomlein2012advanced}
-Michal Tomlein, Pavol Bielik, Peter Kr{\'a}tky, Stefan Mitr{\'\i}k, Michal
-  Barla, and M{\'a}ria Bielikov{\'a}. 2012.
+\bibitem[{Tomlein et~al.(2012)Tomlein, Bielik, Kratky, Mitrik, Barla, and
+  Bielikova}]{tomlein2012advanced}
+Michal Tomlein, Pavol Bielik, Peter Kratky, Stefan Mitrik, Michal Barla, and
+  Maria Bielikova. 2012.
 \newblock Advanced pedometer for smartphone-based activity tracking.
 \newblock In {\em HEALTHINF\/}. pages 401--404.
+
+\bibitem[{Wikipedia(2017{\natexlab{a}})}]{wiki:pedometer}
+Wikipedia. 2017{\natexlab{a}}.
+\newblock Pedometer wikipedia, the free encyclopedia.
+\newblock \url{https://en.wikipedia.org/wiki/Pedometer}.
+\newblock [Online; accessed 14-December-2017].
+
+\bibitem[{Wikipedia(2017{\natexlab{b}})}]{wiki:tensorflow}
+Wikipedia. 2017{\natexlab{b}}.
+\newblock Tensorflow --- {W}ikipedia{,} the free encyclopedia.
+\newblock \url{https://en.wikipedia.org/wiki/TensorFlow}.
+\newblock [Online; accessed 14-December-2017].
 
 \bibitem[{Zaremba et~al.(2014)Zaremba, Sutskever, and
   Vinyals}]{zaremba2014recurrent}
