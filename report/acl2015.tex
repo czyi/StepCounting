@@ -148,53 +148,54 @@ We propose an LSTM model trained with indoor walking sensor data from iPhone for
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=1]{input2}
-\caption{Input (green) and output (pink) examples for LSTM. Use recorded sensor data from t previous timesteps ago to current time (green blocks, containing t records) to predict the current step (last pink block, last output of the lstm model). The intermediate outputs (light pink) of the model would be regards as output for first (t-1) records at beginning of each segment since they don't have enough previous record. }
+\caption{Input (green) and output (pink) samples for our model. The model uses the latest t records of the sensor data (green blocks) to predict the current status (the last pink block). The first t-1 predictions of each segment are from the intermediate outputs (light pink) of the recurrent neural network, since they do not have t records for prediction as the rest do.}
 \label{fig:batch_sensor_data}
 \end{figure*}
 
-We use two kinds of file from the dataset. The first type is the CSV files of iPhone sensor data.  Each CSV file contians recorded one iPhone sensor data per path and per person. There are 39 columns of sensor data and some of them are more useful than others such as rotation rate and user acceleration. So we use the six sensor data (rotationRateX, rotationRateY, rotationRateZ,  userAccelerationX, userAccelerationY, userAccelerationZ) as input. 
+We use two kinds of files from the dataset. The first type is CSV format iPhone sensor data.  Each CSV file contians the sensor data recorded with a path and a person. There are 39 columns of sensor data and some of them are more useful than others. So we select 6 columns (rotationRateX, rotationRateY, rotationRateZ,  userAccelerationX, userAccelerationY, userAccelerationZ) from the sensor data to building our model. 
 
-The second type is the XML files containing annotated ground truth data for all the paths walked by all the participants. Each file contains start time, end times and direction for each segment the user walked through . For each segment, the time and foot of each step is recorded, and special situation liking moving to the wall is also marked as feature with start time, end time and detailed events. We only train and test the step counting system on sensor data when participants traverse straight segments in the paths, where gait patterns is assumed to be regular, and remove time slots marked as feature. 
+The second type is XML file containing annotated ground truth data for paths walked by each participant. Each file contains tags of start time, end time and direction for each segment the participant walked through . For each segment, the time and foot of each step is recorded, and special situation such as moving to the wall is also marked as feature with start time, end time and detailed description. We only train and test the step counting system with the segments recorded when participants traverse straight in each path, where gait patterns are assumed to be regular. We also remove time slots that have been marked as feature. 
 
-Since the XML files only contain heel strike times, we cannot use it as labels directly. If we regard heel strike times as 1 and other times as 0, then the labels are unbalanced. So we transform the XML file to binary signal in which left steps trigger the signal from 0 to 1 and right steps trigger the signal from 1 to 0 as shown in picture \ref{fig:ground_truth}.
+Since the XML files only contain heel strike times and it's very difficult to predict heel strike times with the sensor data, we can not use them as the labels directly. If we regard the labels at heel strike times as 1s and the labels at other points in time as 0s, then the labels are too unbalanced to train a model to predict the labels at each point in time. So we transform the XML files to binary signals in which left steps toggle the signal from 0 to 1 and right steps toggle the signal from 1 to 0 as shown in Figure \ref{fig:ground_truth}.
 
-Finally we windowed the data (window size is equal to timesteps) for corresponding sensor data and ground truth signals to generate the training data and labels.
+Finally, we windowed the data (window size is equal to the number of timesteps) for corresponding sensor data and ground truth signals to generate the formatted training data and labels.
 
 
-\subsection{LSTM Model}
-Long short-term memory (LSTM) network is a time-recursive neural network, suitable for processing and prediction the important events of time series in the relatively long delay . LSTM has many applications in science and technology domains. The LSTM-based system can learn tasks such as translating languages, image analysis, speech recognition, controlling chat robots and so on.
+\subsection{The LSTM Model}
+Long short-term memory (LSTM) network is a time recursive neural network, suitable for processing and predicting important properties of time series data. LSTM has many applications in the science and technology domains. LSTM-based systems can learn tasks such as translating natural languages, image analysis, speech recognition, controlling chat robots and so on.
 
-Long short-term memory (LSTM) network is a special kind of recurrent neural network (RNN). The main difference between LSTM and RNN lies in that it adds a "processor" to judge whether the information is useful or not in the algorithm. The structure of this processor is called cell.
-Three multiplicative units (input door, forgotten door and output door) are placed in the cell. When a message enters the LSTM network, the system would determine whether the message is useful or not. Only information that complies with algorithmic certification will remian, and misleading information will be forgotten through forgotten doors.
+LSTM network is a special kind of recurrent neural network (RNN). The main difference between LSTM and RNN lies in that LSTM adds a "processor" to judge whether the information is useful or not in the algorithm. The structure of this processor is called cell.
+
+Three non-linear units (a input gate, a forget gate and a output gate) are placed in the cell. When a message enters the LSTM network, the system would determine whether the message is useful or not. Only information that complies with algorithmic requirements will remain, and misleading information will be forgotten through the forget gate.
 
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{LSTM3}
-\caption{Two layer LSTM recurrent network. Each green block is a LSTM block. Blue circle D(t) represent for sensor data recorded at time t, s is inner LSTM state, pink circle F is the output. Each LSTM cell receives the  input of current sensor data and state from previous cell (initial state is 0), and ouput a state  and a output.}
+\caption{A two-layer LSTM recurrent network. Each green block is an LSTM cell. Blue circle D(t) represents the sensor data recorded at time t while s is the inner LSTM state, and pink circle F is the output. Each LSTM cell receives the input of current sensor data and state from previous cell (the initial state is 0), and outputs a state and an output.}
 \label{fig:LSTM}
 \end{figure}
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.6]{error_metric}
-\caption{An example of three error metrics. Assume above plot is a entire segement. Error metric 1 (read line) split intervals exactly at each heel strike time. Error metric 2 (blue line) split intervals at middle of every two continues heel strike times. Error metric 3 calculate undercount and overcount rate for the entire segment.}
+\caption{An example of three error metrics. Assume above plot is an entire segement. Error metric 1 (read line) divides segments into intervals exactly at each heel strike time. Error metric 2 (blue line) divides intervals at the center point of every pair of adjacent heel strike times. Both error metric 1 and 2 compute ndercount and overcount rates for each interval independently while error metric 3 calculates undercount and overcount rates within the entire segment.}
 \label{fig:error_metric}
 \end{figure*}
 
-We use TensorFlow to implement LSTM network. TensorFlow is an open-source software library that can be used for machine learning applications such as neural networks \cite{wiki:tensorflow}. It supports both CPU and GPU that can be imported as a python library. TensorFlow uses a data flow graph to represent computation in terms of the dependencies between individual operations \cite{tensorflow.org}. We first define the data flow graph and then create a session to run the graph. The saver class can save and restore variables to and from checkpoints by mapping variable names to tensor values.
+We use TensorFlow to implement the LSTM network. TensorFlow is an open-source software library that can be used for machine learning applications such as neural networks \cite{wiki:tensorflow}. It supports both CPU and GPU and it provides an interface in Python. TensorFlow uses a data flow graph to represent computation in terms of the dependencies between individual operations \cite{tensorflow.org}. We first define the data flow graph and then create a session to run the graph. The saver class can save and restore the values of graph variable to and from checkpoints by mapping variable names to tensor values.
 
-As shown in picture \ref{fig:LSTM}, a two-layer RNN network with basic LSTM cell is built for training with squared difference loss function. 
-As shown in picture \ref{fig:batch_sensor_data}, the input batch is a list of metrics. Each row of metrics is a list of sensor data at a time. The length of times is called timesteps.
-For Example, we want to use previous timesteps ($=50$) record of sensor data to predict the result, each sensor data contains input number ($=6$) of values of rotation rate and user acceleration in 3-dimension. So the matrix size is timesteps multiply input number($50 \times 6$). All such metrics form the input list and is transformed to tensor as train data. Since the dataset is big and there are more than one hundred thousand elements in input list which would make the training process very slow, we shuffle and divide train data into the small batch (batch size = 256) and feed the batches to model one step by one step.
+As shown in Figure \ref{fig:LSTM}, a two-layer RNN network with 2 basic LSTM cells is built for training with mean squared error loss function. 
+As shown in Figure \ref{fig:batch_sensor_data}, the input batch is a list of matrices. Each row of the matrices is a list of sensor data at a point in time. The length of the list is called the number of timesteps.
+For example, if we want to use the sensor data recorded at the latest 50 points in time to predict the current label, each sensor data contains input size ($6$ in our model) values of rotation rate and user acceleration in 3-dimension. So the matrix size is the number of timesteps multiply input size which is $50 \times 6$. All such matrices form the input list and are transformed to tensor as the training data. Since the dataset is big and there are more than one hundred thousand elements in the input list which would make the training process very slow, we shuffle and divide traning data into small batches (batch size = 256) and feed the batches to the optimizer one step by one step.
 
-There are two ways of output. The first one  is to use previous timesteps data to predict only the last step signal value. The second way is to use previous timesteps data to predict corresponding timesteps step results. The first one cannot predict the first timesteps result, but it is more precise since all result is predicted by previous timesteps record.  Outputs that have enough previous records (timesteps previos record) are predicted output using first way. But the first timestep outputs of each segment don't have enough previous records, so they are predicted using the second way.
+There are two ways to get the outputs. The first one is to use the latest 50 inputs to predict the current output. The second way is to use the intermediate outputs of RNN to generate predictions. The first one can not predict the first 50-1 labels, but it is more precise since more information is used to produce one output. We use the first way to predict all other labels.
 
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{output_sighted}
-\caption{Sample output of mixed data for sighted people. The origin output signal (blue line) swings near 0 or 1. The round signal (yellow line) is quite similar to the ground truth data (red line).}
+\caption{Sample output from mixed data for all sighted people. The origin output signal (blue line) swings near 0 or 1. The round signal (yellow line) is quite similar to the ground truth data (red line).}
 \label{fig:output_sighted}
 \end{figure*}
 
@@ -202,40 +203,40 @@ There are two ways of output. The first one  is to use previous timesteps data t
 
 \subsection{Error Metrics}
 
-The origin result signal is a float function around 0 to 1. Then we use 0.5 as the border to turn the signal into 0 or 1. And the predicted heel strike times is the signal change times. We can calculate the accuracy rate of the result, which is the proportion of correct numbers (1 is predicted to be 1 and 0 is predicted to be 0) and total numbers. The error rate of the step counting model was measured using three different metrics as shown in picture \ref{fig:error_metric}. The first two metric is same as error metric in \cite{flores2016weallwalk}.
+The original result signal is a list of float numbers around 0 to 1. Then we transform the signal into a binary signal where the value is either 0 or 1. And the predicted heel strike times is the signal change times. Now we can calculate the accuracy rate of the result, which is the proportion of correct predictions (1 is predicted as 1 or 0 is predicted as 0) in total predictions. The error rate of the step counting model was measured using three different metrics as shown in Figure \ref{fig:error_metric}. The error metric 1 and 3 are as same as the error metrics proposed in \cite{flores2016weallwalk}.
 
-The first metric split intervals at each ground-truth heel strike times, and counts the number of predicted steps within each time interval $[T_i, T_{i+1}]$.  Ifexactly one step is detected at each interval, the count of step is correct. If no step is detected during the interval, then one undercount event happens. If multiple steps are detected during the interval, then number of count-1 overcount events happen. The undercount and overcount rate is number of undercount and overcount event divided by the total count of ground-truth steps.
+The first metric splits intervals at each real heel strike times, and counts the number of predicted steps within each time interval $[T_i, T_{i+1}]$.  If exact one step is detected within each interval, the count of step is correct. If no step is detected during the interval, then one undercount event happens. If $n$ steps are detected during the interval, then $n-1$ overcount events are recorded. The undercount and overcount rate is the number of undercount events or overcount events divided by the total number of real steps.
 
-The second metric is similar to the first one,  but it  split intervals at middle of two continues ground-truth heel strike times, and counts the number of predicted steps within each time interval $[[\frac{T_{i-1}+T_i}{2}, \frac{T_i+T_{i+1}}{2}]$. The undercount and overcount is calculated same as first metric. As shown in picture \ref{fig:output_small_metric2} at end of the paper,  the metric can decrease error rate when one step is detected sightly earlier ($t_i<T_i$) and the next step is detected sighted later ($t_{i+1}<T_{i+1}$). For this case, interval $[T_i, T_{i+1}]$ has one undercount, and interval $[T_{i-1}, T_i]$ and $[T_{i+1}, T_{i+2}]$ have one overcount.
+The second metric is similar to the first one,  but it  splits intervals at the center point of two adjacent ground-truth heel strike times, and counts the number of predicted steps within each time interval $[[\frac{T_{i-1}+T_i}{2}, \frac{T_i+T_{i+1}}{2}]$. The undercount and overcount rate is calculated in a same way as the first metric does. As shown in Figure \ref{fig:output_small_metric2} at the end of this paper,  the metric can decrease error rate when one step is detected sightly earlier ($t_i<T_i$) and the next step is detected sighted later ($t_{i+1}<T_{i+1}$). In this case, interval $[T_i, T_{i+1}]$ has one undercount event, and interval $[T_{i-1}, T_i]$ and $[T_{i+1}, T_{i+2}]$ have one overcount event.
 
-The third metric counts number of predicted steps during each segment and compare to the number of ground-truth steps during the same segment. If the ground-truth number is larger, then undercount events happen. If the predicted number is larger, then overcount events happen. The undercount and overcount rate is proportion between sum of undercount and overcount numbers over all segment and the total count of ground-truth steps. The undercount and overcount rate obtained by the error metric 3 metrics is always smaller than or equal to the corresponding values computed by the metric 1 and 2.
+The third metric counts number of predicted steps during each segment and compare to the number of ground-truth steps during the same segment. If the ground-truth number is larger, then undercount events happen. If the predicted number is larger, then overcount events happen. The undercount and overcount rate is calculated by dividing sum of undercount events and overcount events by the number of all steps in ground truth. The undercount and overcount rate obtained by the error metric 3 is always smaller than or equal to the corresponding values computed by the metric 1 and 2.
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{error_metric_23_na_10fold}
-\caption{Error metric 2 and 3 for 10 fold cross validation of mixed data for sighted people.The error rate of metric 2 is always higher than metric 3. The undercount error (blue blocks) is less than overcount error (grey blocks). Detailed values is shown in table \ref{label_metric23_sighted}.}
+\caption{Error rates measured in error metric 2 and 3 under 10-fold cross-validation on mixed data for all sighted people. The error rate of metric 2 is always higher than metric 3. The undercount error rate (blue blocks) is less than overcount error rate(grey blocks). Detailed values are shown in table \ref{label_metric23_sighted}.}
 \label{fig:error_metric_23_na_10fold}
 \end{figure*}
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{error_metric_123_na_5fold}
-\caption{Error metric 1, 2 and 3 for leave one out of sighted people.}
+\caption{Error rates measured in error metric 1, 2 and 3 for leave-one-out data of sighted people.}
 \label{fig:error_metric_123_na_5fold}
 \end{figure*}
 
 
-\section{Experience}
+\section{Experiments}
 
-We preprocessed the WeAllWalk data to train LSTM model for the different communities using two ways of splitting train and test data. First way is simply mixed all data and split into train and test set. In this way, both train and test data contain records from all participant and all  segment. The second way is leave one person out, which means test set contains and only contains all records from one participant and train set contains all other records from remain participants.
+We preprocessed the WeAllWalk data to train the LSTM model for the different communities by using two ways of splitting training and testing data. The first way is to simply mix all data and split it into training set and testing set. In this way, both training and testing data contain records from all participant and all segments. The second way is leaving one person out, which means testing set contains and only contains all records from one participant while tranining set contains all other records from the remaining participants.
 
-The model is trained with different sensor data, timesteps, output number, hidden layer number, optimizer, learning rate and training steps. We first try different optimizers with various learning rate and find that AdamOptimizer with learning rate around 0.01 can make it convergence, and then fix the two parameters. 
+The model is trained with different sensor data, number of timesteps, output size, numbers of hidden layers, optimizers, learning rates and numbers of training steps. We first try different optimizers with various learning rates and find that AdamOptimizer with a learning rate around 0.01 can make the loss converged, and then fix the optimizer. 
 
 
 \subsection{Sighted people}
-There are more than 120,000  valid records of sighted people, we split it into 100,000 train data and 25,000 test data. Each input data is a 3-dimensional tensor, with a shape of batch size $\times$ timesteps $\times$ number of sensor data.
+There are more than 120,000 valid records from sighted walkers, we split it into 100,000 records of training data and 25,000 records of testing data. Each input is a 3-dimensional tensor, with a shape of batch size $\times$ number of timesteps $\times$ number of sensor signals.
 
-For mixed data, we apply 10 folds cross-validation. A good result sample is shown in picture \ref{fig:output_sighted}. The output signal swings near 0 or 1. So it is reasonable to round the signal ($>0.5$ turn to 1, $<=0.5$ turn to 0). The round signal is similar to the ground truth data. However, not all result is as good as this sample, some bad samples are shown in end of the paper. Some result has a certain offset between ground truth data and predicted output, some result function shakes more fiercely so that not all values are close to 0 and 1. There tend to be more strikes if the output value shakes around 0.5. So in the experience the overcount rate is always higher than the overcount rate.
+For mixed data, we apply 10-fold cross-validation. A good result sample is shown in Figure \ref{fig:output_sighted}. The output signal swings near 0 or 1. So it is reasonable to round the signal ($>0.5$ turn to 1, $<=0.5$ turn to 0). The rounded signal is similar to the ground truth data. However, not all results are as good as in this sample. Some of the bad results are shown at the end of the paper. Some results have a certain offset between the real heel strike time and the predicted heel strike time, some result curves shake more fiercely so that not all values are close to 0 or 1. There tend to be more strikes if the output value shakes around 0.5. So in our experiments, the overcount rate is always higher than the overcount rate.
 
 \begin{figure}[ht]
 \centering
@@ -245,15 +246,15 @@ For mixed data, we apply 10 folds cross-validation. A good result sample is show
 \end{figure}
 
 
-Since there are 6 error values, it difficult to determine a weighted format over each error rate and tell which model is better. All ten results are shown in picture \ref{fig:error_metric_23_na_10fold}.
-The average undercount rate of metric 3 is around 0.6\%, and the average overcount rate of metric 3 is around 1.4\%.  
-The average undercount rate of metric 2 is around 0.9\%, and the average overcount rate of metric 2 is around 1.7\%.  
-The value of error rate is shown in table \ref{label_metric23_sighted}. The error rate of metric 1 is much higher than error rate of metric 2 and 3, the undercount rate of metric 1  is similar to overcount rate of metric 1 (around 20\%) as shown in picture \ref{fig:error_metric_1_na_10fold}. The reason that caused such situation is described in picture \ref{fig:output_small_metric2}. So the metric 1 error rate of undercount and overcount is similar since when a undercount happened it is likely to cause a overcount.
+Since there are 6 error rates, it is difficult to determine an overall measurement combining all error rates and tell which model is better. All 10 results are shown in Figure \ref{fig:error_metric_23_na_10fold}.
+The average undercount rate measured in metric 3 is around 0.6\%, and the average overcount rate measured in  metric 3 is around 1.4\%.  
+The average undercount rate measured in  metric 2 is around 0.9\%, and the average overcount rate measured in metric 2 is around 1.7\%.  
+The value of error rate is shown in table \ref{label_metric23_sighted}. The error rate measured in metric 1 is much higher than error rate measured in metric 2 and 3, the undercount rate measured in metric 1 is similar to overcount rate measured in metric 1 (around 20\%) as shown in Figure \ref{fig:error_metric_1_na_10fold}. The reason that caused such situation is described in Figure \ref{fig:output_small_metric2}. In metric 1, undercount and overcount error rates are similar, since a undercount event is usually followed by a overcount event and vice versa.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.55]{error_metric_2_na_step}
-\caption{Error metric 1 and 3 for 10 fold cross validation of sighted people.The error rate of metric 1 is always higher than metric 3 with regrad to training steps.}
+\caption{Error rates measured in metric 1 and 3 under 10-fold cross-validation with sighted people data. The error rate measured in metric 1 is always higher than in metric 3.}
 \label{fig:error_metric_2_na_step}
 \end{figure}
 
@@ -261,7 +262,7 @@ The value of error rate is shown in table \ref{label_metric23_sighted}. The erro
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{error_metric_wc_10fold_valid4000}
-\caption{Leave one out - Valid Error for Blind People with a long cane}
+\caption{Error rates on blind people with a long cane leave-one-out validation set.}
 \label{fig:error_metric_wc_10fold_valid4000}
 \end{figure*}
 
@@ -269,19 +270,19 @@ The value of error rate is shown in table \ref{label_metric23_sighted}. The erro
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{error_metric_wc_10fold_test4000}
-\caption{Leave one out - Test Error for Blind People with a long cane}
+\caption{Error rates on blind people with a long cane leave-one-out testing set.}
 \label{fig:error_metric_wc_10fold_test4000}
 \end{figure*}
 
-For leave one person out method, the cross validation result is shown in picture \ref{fig:error_metric_123_na_5fold}.
+For leave one person out method, the cross validation result is shown in Figure \ref{fig:error_metric_123_na_5fold}.
 The average undercount rate of metric 3 is around 2.5\%. The average overcount rate of metric 3 is around 7\%.
- In some case, metric 2 has bad performance, this is because there is an offset around half of each interval as shown in the picture  \ref{fig:error_metric_2_na_step}. 
- In the experience with different parameters of LSTM model,  some vaildation sets (cv3 perform best in most of experience) have overcount and undercount rate less than 0.1\% of metric 3, while less than 1\% for metric 1 or 2. But for other validation set, the overcount rate is extremely high likely 30\% to 60\%. Each vaildation set has better performance with models of different parameters. It may because different people have different gaits. So I choose the model where each validation sets have average performance. 
+ In some case, metric 2 has bad performance, this is because there is an offset around half of each interval as shown in the Figure  \ref{fig:error_metric_2_na_step}. 
+ In the experiments with different parameters of LSTM model,  some vaildation sets (cv3 perform best in most of the experiments) have overcount and undercount rate less than 0.1\% of metric 3, while less than 1\% for metric 1 or 2. But for other validation set, the overcount rate is extremely high likely 30\% to 60\%. Each vaildation set has better performance with models of different parameters. It may because different people have different gaits. So I choose the model where each validation sets have average performance. 
 
-When the train and test data both contains the sensor data from certain people,  the predicted signal is quite accurate, and the error (metric 2 and 3) of step counting is small. However, for leave one out method, there would be offsets for both train and test data, and the accuracy of predicted signal is low. But the error 1 could be small if the offset is similar for each heel strikes as shown in picture \ref{fig:output_ex_offset}. 
+When the train and test data both contains the sensor data from certain people,  the predicted signal is quite accurate, and the error (metric 2 and 3) of step counting is small. However, for leave one out method, there would be offsets for both train and test data, and the accuracy of predicted signal is low. But the error 1 could be small if the offset is similar for each heel strikes as shown in Figure \ref{fig:output_ex_offset}. 
 
 \subsection{Blind People with a long cane}
-There are more than 120,000 records from blind people with a long cane, participants 1, 2, 3, 5, 6, 7, 8 have sensor data for six paths. So we use participant 8 as test data, and records from remain six people as train and validation data for 6 fold cross validation for leave one out. The valid and test result is shown in picture \ref{fig:error_metric_wc_10fold_valid4000} and \ref{fig:error_metric_wc_10fold_test4000}. All error rate is higher than mix data. The validation set has good performance don't means that the test data also have good performance.
+There are more than 120,000 records from blind people with a long cane, participants 1, 2, 3, 5, 6, 7, 8 have sensor data for six paths. So we use participant 8 as test data, and records from remain six people as train and validation data for 6 fold cross validation for leave one out. The valid and test result is shown in Figure \ref{fig:error_metric_wc_10fold_valid4000} and \ref{fig:error_metric_wc_10fold_test4000}. All error rate is higher than mix data. The validation set has good performance don't means that the test data also have good performance.
 The training data only contains six different people, which is not a big number. If we have annotated data from more people, LSTM model may detect common features of blind people and provide a better result.
 
 \begin{figure*}[ht]
@@ -317,7 +318,7 @@ metric1                  & undercount & 23.90 & 10.18 \\
 
 We train an LSTM model using annotated smartphone sensor data from the WeAllWalk dataset, to predict output signal. In the dataset, blind volunteers using a long cane or a guide dog, sighted volunteers have different features of gaits, so we separately build the model and calculate the error rate of three metrics. We also apply leave one person out pedometers to test the accuracy of our mode using three error metrics, whihc splitting intervals differently to estimate the overcount and undercount of steps.  The model achieved 1\% overcount and undercount rate for mixed training data and 5\% for Leave-One-Out training modality.
 
-As shown in picture \ref{fig:overcount} and picture \ref{fig:undercount}, simply round the origin output signal may cause the overcount or undercount. So we can use a better way to turn the signal into binary signal. In this paper, we only use the data of straight segments, removing turn segment and other features. We could consider about turn segments and feature motions. We now only use rotation rate and user acceleration as inout sensor data, we can also try more sensor data in future.
+As shown in Figure \ref{fig:overcount} and Figure \ref{fig:undercount}, simply round the origin output signal may cause the overcount or undercount. So we can use a better way to turn the signal into binary signal. In this paper, we only use the data of straight segments, removing turn segment and other features. We could consider about turn segments and feature motions. We now only use rotation rate and user acceleration as inout sensor data, we can also try more sensor data in future.
 
 \begin{figure}[ht]
 \centering
@@ -347,7 +348,7 @@ As shown in picture \ref{fig:overcount} and picture \ref{fig:undercount}, simply
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{error_metric_1_na_10fold}
-\caption{Error metric 1 for 10 fold cross validation for sighted people. The error rate is much higher than error rate for metric 2 and 3 as shown in picture. The reason that caused such situation is described in picture.}
+\caption{Error metric 1 for 10-fold cross-validation for sighted people. The error rate is much higher than error rate for metric 2 and 3 as shown in this figure. The reason that caused such situation is also described in tge figure.}
 \label{fig:error_metric_1_na_10fold}
 \end{figure*}
 
