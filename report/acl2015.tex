@@ -274,32 +274,32 @@ The value of error rate is shown in table \ref{label_metric23_sighted}. The erro
 \label{fig:error_metric_wc_10fold_test4000}
 \end{figure*}
 
-For leave one person out method, the cross validation result is shown in Figure \ref{fig:error_metric_123_na_5fold}.
-The average undercount rate of metric 3 is around 2.5\%. The average overcount rate of metric 3 is around 7\%.
- In some case, metric 2 has bad performance, this is because there is an offset around half of each interval as shown in the Figure  \ref{fig:error_metric_2_na_step}. 
- In the experiments with different parameters of LSTM model,  some vaildation sets (cv3 perform best in most of the experiments) have overcount and undercount rate less than 0.1\% of metric 3, while less than 1\% for metric 1 or 2. But for other validation set, the overcount rate is extremely high likely 30\% to 60\%. Each vaildation set has better performance with models of different parameters. It may because different people have different gaits. So I choose the model where each validation sets have average performance. 
+For leave one person out method, the cross-validation result is shown in Figure \ref{fig:error_metric_123_na_5fold}.
+The average undercount rate in metric 3 is around 2.5\%. The average overcount rate in metric 3 is around 7\%.
+In some cases, metric 2 has bad performances, because there is an offset around half of each interval as shown in the Figure \ref{fig:error_metric_2_na_step}. 
+In the experiments with different parameters of LSTM model, some vaildation sets (cv3 performs best in most of the experiments) have overcount and undercount rates less than 0.1\% in metric 3, while less than 1\% in metric 1 or 2. But for other validation sets, the overcount rate is extremely high (30\% to 60\%). Each vaildation set has a better performance with models with different parameters. It might because different people have different gait patterns. So I choose the model where each validation set has a average performance. 
 
-When the train and test data both contains the sensor data from certain people,  the predicted signal is quite accurate, and the error (metric 2 and 3) of step counting is small. However, for leave one out method, there would be offsets for both train and test data, and the accuracy of predicted signal is low. But the error 1 could be small if the offset is similar for each heel strikes as shown in Figure \ref{fig:output_ex_offset}. 
+When both the training and testing data contain the sensor data from all people, the predicted signal is quite accurate, and the error rate (in metric 2 and 3) of step counting is small. However, with leave-one-out method, there would be offsets for both tranining and testing data, and the accuracy of predicted signal is low. But the error rate in metric 1 could be small if the offset is similar for each heel strikes as shown in Figure \ref{fig:output_ex_offset}. 
 
 \subsection{Blind People with a long cane}
-There are more than 120,000 records from blind people with a long cane, participants 1, 2, 3, 5, 6, 7, 8 have sensor data for six paths. So we use participant 8 as test data, and records from remain six people as train and validation data for 6 fold cross validation for leave one out. The valid and test result is shown in Figure \ref{fig:error_metric_wc_10fold_valid4000} and \ref{fig:error_metric_wc_10fold_test4000}. All error rate is higher than mix data. The validation set has good performance don't means that the test data also have good performance.
-The training data only contains six different people, which is not a big number. If we have annotated data from more people, LSTM model may detect common features of blind people and provide a better result.
+There are more than 120,000 records from blind people with a long cane, participants 1, 2, 3, 5, 6, 7, 8 have sensor data for six paths. So we use data from participant 8 as the testing data, and records from all remaining people as the tranining and validation data for 6-fold leave-one-out cross-validation. The validation and testing results are shown in Figure \ref{fig:error_metric_wc_10fold_valid4000} and \ref{fig:error_metric_wc_10fold_test4000}. All error rates are higher than on the mixed data. The good performance from the validation data does not mean that the the model can have a good performance on the testing data.
+The training dataset only contains data from 6 different people, which is not a big number. If we have annotated data from more people, the LSTM model might detect more walking patterns of blind people and provide a better result.
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{blind_gd}
-\caption{Sample output of blind people with guide dog.}
+\caption{Sample output on blind people with guide dog.}
 \label{fig:blind_gd}
 \end{figure*}
 
 
-\subsection{Blind walkers using a guide dog}
+\subsection{Blind people using a guide dog}
 
-There are only 3 people walked with the guide dog, each has 30,000 data. So we regard two people as train data, and the left one as test data. The result is bad as shown in \ref{fig:blind_gd}. Although mixed data shows good performance around 5\% for metric 2 and 2\% for metric 3, it is not likely to predict the strike heel times of a person from only one different person.
+There are only 3 people walking with a guide dog. Each of them generates 30,000 records of sensor data. So we regard the data from two people as the training data, and those from the left one as the testing data. The result is bad as shown in \ref{fig:blind_gd}. Although the model shows a  good performance on mixed data (error rate is around 5\% in metric 2 and 2\% in metric 3), it is difficult to predict the strike heel times of a person with a model trained with the data from only one other person.
 
 \begin{table}[]
 \centering
-\caption{Error of blind people with guide dog}
+\caption{Error rates on blind people with a guide dog}
 \label{my-label}
 \begin{tabular}{llll}
 \hline
@@ -316,21 +316,21 @@ metric1                  & undercount & 23.90 & 10.18 \\
 
 \section{Conclusion and Future Work}
 
-We train an LSTM model using annotated smartphone sensor data from the WeAllWalk dataset, to predict output signal. In the dataset, blind volunteers using a long cane or a guide dog, sighted volunteers have different features of gaits, so we separately build the model and calculate the error rate of three metrics. We also apply leave one person out pedometers to test the accuracy of our mode using three error metrics, whihc splitting intervals differently to estimate the overcount and undercount of steps.  The model achieved 1\% overcount and undercount rate for mixed training data and 5\% for Leave-One-Out training modality.
+We trained an LSTM model using annotated smartphone sensor data from the WeAllWalk dataset to count steps. In the dataset, blind volunteers using a long cane or a guide dog, sighted volunteers have different gait patterns, so we separately built the models and calculated the error rates in three metrics. We also applied leave-one-out pedometers to test the accuracy of our models by using three error metrics, that split intervals differently to compute the number of overcounted and undercounted steps. The model achieved 1\% overcount and undercount rate on the mixed training data and 5\% under leave-one-out training modality.
 
-As shown in Figure \ref{fig:overcount} and Figure \ref{fig:undercount}, simply round the origin output signal may cause the overcount or undercount. So we can use a better way to turn the signal into binary signal. In this paper, we only use the data of straight segments, removing turn segment and other features. We could consider about turn segments and feature motions. We now only use rotation rate and user acceleration as inout sensor data, we can also try more sensor data in future.
+As shown in Figure \ref{fig:overcount} and Figure \ref{fig:undercount}, simply rounding the origin output signal might cause overcount or undercount event. So we can use a better way to transform the signal into a binary signal. In this paper, we only use the data of straight segments by removing turn segments and other features. We could consider turn segments and feature motions in the future. We now only use rotation rate and user acceleration as the input, we can also try more features in the dataset in the future.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.4]{undercount}
-\caption{Sample of undercount.}
+\caption{Sample of undercounting.}
 \label{fig:undercount}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.4]{overcount}
-\caption{Sample of overcount.}
+\caption{Sample of overcounting.}
 \label{fig:overcount}
 \end{figure}
 
@@ -338,7 +338,7 @@ As shown in Figure \ref{fig:overcount} and Figure \ref{fig:undercount}, simply r
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{output_small_metric2}
-\caption{Bad sample for error metric 1. The green line splits the intervals of error metric 1. There are random offset between actual strikes times and predicted strike times. In this case, the first, third and fifth interval has one overcount, second and fourth interval has one undercount.}
+\caption{Bad sample in error metric 1. The green line splits the intervals in error metric 1. There are random offsets between actual strike times and predicted strike times. In this case, the first, third and fifth interval has one overcount while the second and the fourth intervals have one undercount.}
 \label{fig:output_small_metric2}
 \end{figure*}
 
@@ -348,7 +348,7 @@ As shown in Figure \ref{fig:overcount} and Figure \ref{fig:undercount}, simply r
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{error_metric_1_na_10fold}
-\caption{Error metric 1 for 10-fold cross-validation for sighted people. The error rate is much higher than error rate for metric 2 and 3 as shown in this figure. The reason that caused such situation is also described in tge figure.}
+\caption{Error metric 1 under 10-fold cross-validation on sighted people. The error rate is much higher than the error rate in metric 2 and 3 as shown in this figure. The reason that caused such situation is also described in tge figure.}
 \label{fig:error_metric_1_na_10fold}
 \end{figure*}
 
@@ -356,14 +356,14 @@ As shown in Figure \ref{fig:overcount} and Figure \ref{fig:undercount}, simply r
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{output_wc_1}
-\caption{Sample output of blind people with long cane.}
+\caption{Sample output on blind people with a long cane.}
 \label{fig:output_wc_1}
 \end{figure*}
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[scale=0.5]{output_wc_2}
-\caption{Sample output of blind people with long cane.}
+\caption{Sample output on blind people with a long cane.}
 \label{fig:output_wc_2}
 \end{figure*}
 
@@ -372,7 +372,7 @@ As shown in Figure \ref{fig:overcount} and Figure \ref{fig:undercount}, simply r
 
 \begin{table*}[]
 \centering
-\caption{Error metric 2 and 3 for 10 fold cross validation of sighted people}
+\caption{Performance measured in metric 2 and 3 under 10-fold cross-validation on sighted people}
 \label{label_metric23_sighted}
 \begin{tabular}{llllllllllll}
 \hline
@@ -387,7 +387,7 @@ metric1                  & undercount & 0.82  & 0.75  & 0.62  & 0.75  & 0.62  & 
 
 \begin{table*}[]
 \centering
-\caption{Error mertric 1, 2 and 3 for blind walkers using a long cane}
+\caption{Performance measured in mertric 1, 2 and 3 on blind people using a long cane}
 \label{my-label}
 \hspace*{-1.5cm}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
