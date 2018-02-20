@@ -1,48 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: acl2015.aux
-The style file: acl_natbib.bst
+The style file: plainnat.bst
 Database file #1: acl2015.bib
 Warning--empty journal in gers1999learning
-You've used 21 entries,
-            2936 wiz_defined-function locations,
-            716 strings with 8718 characters,
-and the built_in function-call counts, 14884 in all, are:
-= -- 1216
-> -- 636
+You've used 20 entries,
+            2773 wiz_defined-function locations,
+            709 strings with 8799 characters,
+and the built_in function-call counts, 10713 in all, are:
+= -- 994
+> -- 576
 < -- 23
-+ -- 214
-- -- 186
-* -- 980
-:= -- 2128
-add.period$ -- 97
-call.type$ -- 21
-change.case$ -- 192
-chr.to.int$ -- 20
-cite$ -- 22
-duplicate$ -- 1204
-empty$ -- 1177
-format.name$ -- 257
-if$ -- 3119
++ -- 195
+- -- 174
+* -- 796
+:= -- 1542
+add.period$ -- 70
+call.type$ -- 20
+change.case$ -- 118
+chr.to.int$ -- 19
+cite$ -- 41
+duplicate$ -- 517
+empty$ -- 890
+format.name$ -- 208
+if$ -- 2356
 int.to.chr$ -- 2
-int.to.str$ -- 0
-missing$ -- 231
+int.to.str$ -- 1
+missing$ -- 17
 newline$ -- 111
-num.names$ -- 84
-pop$ -- 507
+num.names$ -- 80
+pop$ -- 274
 preamble$ -- 1
-purify$ -- 146
+purify$ -- 98
 quote$ -- 0
-skip$ -- 462
+skip$ -- 425
 stack$ -- 0
-substring$ -- 660
-swap$ -- 598
+substring$ -- 432
+swap$ -- 125
 text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 189
+type$ -- 220
 warning$ -- 1
-while$ -- 103
+while$ -- 98
 width$ -- 0
-write$ -- 284
+write$ -- 276
 (There was 1 warning)

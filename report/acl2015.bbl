@@ -1,137 +1,137 @@
-\begin{thebibliography}{}
-\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\begin{thebibliography}{20}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[{Ahmetovic et~al.(2016)Ahmetovic, Gleason, Ruan, Kitani, Takagi, and
-  Asakawa}]{ahmetovic2016navcog}
+\bibitem[Ahmetovic et~al.(2016)Ahmetovic, Gleason, Ruan, Kitani, Takagi, and
+  Asakawa]{ahmetovic2016navcog}
 Dragan Ahmetovic, Cole Gleason, Chengxiong Ruan, Kris Kitani, Hironobu Takagi,
-  and Chieko Asakawa. 2016.
+  and Chieko Asakawa.
 \newblock Navcog: a navigational cognitive assistant for the blind.
-\newblock In {\em Proceedings of the 18th International Conference on
-  Human-Computer Interaction with Mobile Devices and Services\/}. ACM, pages
-  90--99.
+\newblock In \emph{Proceedings of the 18th International Conference on
+  Human-Computer Interaction with Mobile Devices and Services}, pages 90--99.
+  ACM, 2016.
 
-\bibitem[{Ailisto et~al.(2005)Ailisto, Lindholm, Mantyjarvi, Vildjiounaite, and
-  Makela}]{ailisto2005identifying}
+\bibitem[Ailisto et~al.(2005)Ailisto, Lindholm, Mantyjarvi, Vildjiounaite, and
+  Makela]{ailisto2005identifying}
 Heikki~J Ailisto, Mikko Lindholm, Jani Mantyjarvi, Elena Vildjiounaite, and
-  Satu-Marja Makela. 2005.
+  Satu-Marja Makela.
 \newblock Identifying people from gait pattern with accelerometers.
-\newblock In {\em Proc. SPIE\/}. volume 5779, pages 7--14.
+\newblock In \emph{Proc. SPIE}, volume 5779, pages 7--14, 2005.
 
-\bibitem[{Alzantot and Youssef(2012)}]{alzantot2012uptime}
-Moustafa Alzantot and Moustafa Youssef. 2012.
+\bibitem[Alzantot and Youssef(2012)]{alzantot2012uptime}
+Moustafa Alzantot and Moustafa Youssef.
 \newblock Uptime: Ubiquitous pedestrian tracking using mobile phones.
-\newblock In {\em Wireless Communications and Networking Conference (WCNC),
-  2012 IEEE\/}. IEEE, pages 3204--3209.
+\newblock In \emph{Wireless Communications and Networking Conference (WCNC),
+  2012 IEEE}, pages 3204--3209. IEEE, 2012.
 
-\bibitem[{Brajdic and Harle(2013)}]{brajdic2013walk}
-Agata Brajdic and Robert Harle. 2013.
+\bibitem[Brajdic and Harle(2013)]{brajdic2013walk}
+Agata Brajdic and Robert Harle.
 \newblock Walk detection and step counting on unconstrained smartphones.
-\newblock In {\em Proceedings of the 2013 ACM international joint conference on
-  Pervasive and ubiquitous computing\/}. ACM, pages 225--234.
+\newblock In \emph{Proceedings of the 2013 ACM international joint conference
+  on Pervasive and ubiquitous computing}, pages 225--234. ACM, 2013.
 
-\bibitem[{Case et~al.(2015)Case, Burwick, Volpp, and Patel}]{case2015accuracy}
-Meredith~A Case, Holland~A Burwick, Kevin~G Volpp, and Mitesh~S Patel. 2015.
+\bibitem[Case et~al.(2015)Case, Burwick, Volpp, and Patel]{case2015accuracy}
+Meredith~A Case, Holland~A Burwick, Kevin~G Volpp, and Mitesh~S Patel.
 \newblock Accuracy of smartphone applications and wearable devices for tracking
   physical activity data.
-\newblock {\em Jama\/} 313(6):625--626.
+\newblock \emph{Jama}, 313\penalty0 (6):\penalty0 625--626, 2015.
 
-\bibitem[{Coughlan et~al.(2006)Coughlan, Manduchi, and Shen}]{coughlan2006cell}
-James Coughlan, Roberto Manduchi, and Huiying Shen. 2006.
+\bibitem[Coughlan et~al.(2006)Coughlan, Manduchi, and Shen]{coughlan2006cell}
+James Coughlan, Roberto Manduchi, and Huiying Shen.
 \newblock Cell phone-based wayfinding for the visually impaired.
-\newblock In {\em 1st International Workshop on Mobile Vision\/}. pages 1--15.
+\newblock In \emph{1st International Workshop on Mobile Vision}, pages 1--15,
+  2006.
 
-\bibitem[{Edel and Koppe(2015)}]{edel2015advanced}
-Marcus Edel and Enrico Koppe. 2015.
+\bibitem[Edel and Koppe(2015)]{edel2015advanced}
+Marcus Edel and Enrico Koppe.
 \newblock An advanced method for pedestrian dead reckoning using blstm-rnns.
-\newblock In {\em Indoor Positioning and Indoor Navigation (IPIN), 2015
-  International Conference on\/}. IEEE, pages 1--6.
+\newblock In \emph{Indoor Positioning and Indoor Navigation (IPIN), 2015
+  International Conference on}, pages 1--6. IEEE, 2015.
 
-\bibitem[{Flores and Manduchi(2016)}]{flores2016weallwalk}
-German~H Flores and Roberto Manduchi. 2016.
+\bibitem[Flores and Manduchi(2016)]{flores2016weallwalk}
+German~H Flores and Roberto Manduchi.
 \newblock Weallwalk: An annotated data set of inertial sensor time series from
   blind walkers.
-\newblock In {\em Proceedings of the 18th International ACM SIGACCESS
-  Conference on Computers and Accessibility\/}. ACM, pages 141--150.
+\newblock In \emph{Proceedings of the 18th International ACM SIGACCESS
+  Conference on Computers and Accessibility}, pages 141--150. ACM, 2016.
 
-\bibitem[{Gers et~al.(1999)Gers, Schmidhuber, and Cummins}]{gers1999learning}
-Felix~A Gers, Jurgen Schmidhuber, and Fred Cummins. 1999.
-\newblock Learning to forget: Continual prediction with lstm .
+\bibitem[Gers et~al.(1999)Gers, Schmidhuber, and Cummins]{gers1999learning}
+Felix~A Gers, Jurgen Schmidhuber, and Fred Cummins.
+\newblock Learning to forget: Continual prediction with lstm.
+\newblock 1999.
 
-\bibitem[{Haegele and Porretta(2015)}]{haegele2015validation}
-Justin~A Haegele and David~L Porretta. 2015.
+\bibitem[Haegele and Porretta(2015)]{haegele2015validation}
+Justin~A Haegele and David~L Porretta.
 \newblock Validation of a talking pedometer for adolescents with visual
   impairments in free-living conditions.
-\newblock {\em Journal of Visual Impairment \& Blindness\/} 109(3):219--223.
+\newblock \emph{Journal of Visual Impairment \& Blindness}, 109\penalty0
+  (3):\penalty0 219--223, 2015.
 
-\bibitem[{Hallemans et~al.(2010)Hallemans, Ortibus, Meire, and
-  Aerts}]{hallemans2010low}
-Ann Hallemans, Els Ortibus, Francoise Meire, and Peter Aerts. 2010.
-\newblock Low vision affects dynamic stability of gait.
-\newblock {\em Gait \& posture\/} 32(4):547--551.
-
-\bibitem[{Holbrook et~al.(2011)Holbrook, Stevens, Kang, and
-  Morgan}]{holbrook2011validation}
+\bibitem[Holbrook et~al.(2011)Holbrook, Stevens, Kang, and
+  Morgan]{holbrook2011validation}
 Elizabeth~Ackley Holbrook, Sandy~L Stevens, Minsoo Kang, and Don~W Morgan.
-  2011.
 \newblock Validation of a talking pedometer for adults with visual impairment.
-\newblock {\em Medicine \& Science in Sports \& Exercise\/} 43(6):1094--1099.
+\newblock \emph{Medicine \& Science in Sports \& Exercise}, 43\penalty0
+  (6):\penalty0 1094--1099, 2011.
 
-\bibitem[{Jayalath et~al.(2013)Jayalath, Abhayasinghe, and
-  Murray}]{jayalath2013gyroscope}
-Sampath Jayalath, Nimsiri Abhayasinghe, and Iain Murray. 2013.
+\bibitem[Jayalath et~al.(2013)Jayalath, Abhayasinghe, and
+  Murray]{jayalath2013gyroscope}
+Sampath Jayalath, Nimsiri Abhayasinghe, and Iain Murray.
 \newblock A gyroscope based accurate pedometer algorithm.
-\newblock In {\em International Conference on Indoor Positioning and Indoor
-  Navigation\/}. volume~28, page 31st.
+\newblock In \emph{International Conference on Indoor Positioning and Indoor
+  Navigation}, volume~28, page 31st, 2013.
 
-\bibitem[{Mannini and Sabatini(2011)}]{mannini2011hidden}
-Andrea Mannini and Angelo~Maria Sabatini. 2011.
+\bibitem[Mannini and Sabatini(2011)]{mannini2011hidden}
+Andrea Mannini and Angelo~Maria Sabatini.
 \newblock A hidden markov model-based technique for gait segmentation using a
   foot-mounted gyroscope.
-\newblock In {\em Engineering in Medicine and Biology Society, EMBC, 2011
-  Annual International Conference of the IEEE\/}. IEEE, pages 4369--4373.
+\newblock In \emph{Engineering in Medicine and Biology Society, EMBC, 2011
+  Annual International Conference of the IEEE}, pages 4369--4373. IEEE, 2011.
 
-\bibitem[{Naqvib et~al.(2012)Naqvib, Kumar, Chauhan, and
-  Sahni}]{naqvib2012step}
-Najme~Zehra Naqvib, Ashwani Kumar, Aanchal Chauhan, and Kritka Sahni. 2012.
+\bibitem[Naqvib et~al.(2012)Naqvib, Kumar, Chauhan, and Sahni]{naqvib2012step}
+Najme~Zehra Naqvib, Ashwani Kumar, Aanchal Chauhan, and Kritka Sahni.
 \newblock Step counting using smartphone-based accelerometer.
-\newblock {\em International Journal on Computer Science and Engineering\/}
-  4(5):675.
+\newblock \emph{International Journal on Computer Science and Engineering},
+  4\penalty0 (5):\penalty0 675, 2012.
 
-\bibitem[{Oshin and Poslad(2013)}]{oshin2013ersp}
-Thomas~Olutoyin Oshin and Stefan Poslad. 2013.
+\bibitem[Oshin and Poslad(2013)]{oshin2013ersp}
+Thomas~Olutoyin Oshin and Stefan Poslad.
 \newblock Ersp: An energy-efficient real-time smartphone pedometer.
-\newblock In {\em Systems, Man, and Cybernetics (SMC), 2013 IEEE International
-  Conference on\/}. IEEE, pages 2067--2072.
+\newblock In \emph{Systems, Man, and Cybernetics (SMC), 2013 IEEE International
+  Conference on}, pages 2067--2072. IEEE, 2013.
 
-\bibitem[{TensorFlow(2017)}]{tensorflow.org}
-TensorFlow. 2017.
+\bibitem[TensorFlow(2017)]{tensorflow.org}
+TensorFlow.
 \newblock Programmer's guide - graphs and sessions.
-\newblock \url{https://www.tensorflow.org/programmers_guide/graphs}.
+\newblock \url{https://www.tensorflow.org/programmers_guide/graphs}, 2017.
 \newblock [Online; accessed 14-December-2017].
 
-\bibitem[{Tomlein et~al.(2012)Tomlein, Bielik, Kratky, Mitrik, Barla, and
-  Bielikova}]{tomlein2012advanced}
+\bibitem[Tomlein et~al.(2012)Tomlein, Bielik, Kratky, Mitrik, Barla, and
+  Bielikova]{tomlein2012advanced}
 Michal Tomlein, Pavol Bielik, Peter Kratky, Stefan Mitrik, Michal Barla, and
-  Maria Bielikova. 2012.
+  Maria Bielikova.
 \newblock Advanced pedometer for smartphone-based activity tracking.
-\newblock In {\em HEALTHINF\/}. pages 401--404.
+\newblock In \emph{HEALTHINF}, pages 401--404, 2012.
 
-\bibitem[{Wikipedia(2017{\natexlab{a}})}]{wiki:pedometer}
-Wikipedia. 2017{\natexlab{a}}.
+\bibitem[Wikipedia(2017{\natexlab{a}})]{wiki:pedometer}
+Wikipedia.
 \newblock Pedometer wikipedia, the free encyclopedia.
-\newblock \url{https://en.wikipedia.org/wiki/Pedometer}.
+\newblock \url{https://en.wikipedia.org/wiki/Pedometer}, 2017{\natexlab{a}}.
 \newblock [Online; accessed 14-December-2017].
 
-\bibitem[{Wikipedia(2017{\natexlab{b}})}]{wiki:tensorflow}
-Wikipedia. 2017{\natexlab{b}}.
+\bibitem[Wikipedia(2017{\natexlab{b}})]{wiki:tensorflow}
+Wikipedia.
 \newblock Tensorflow --- {W}ikipedia{,} the free encyclopedia.
-\newblock \url{https://en.wikipedia.org/wiki/TensorFlow}.
+\newblock \url{https://en.wikipedia.org/wiki/TensorFlow}, 2017{\natexlab{b}}.
 \newblock [Online; accessed 14-December-2017].
 
-\bibitem[{Zaremba et~al.(2014)Zaremba, Sutskever, and
-  Vinyals}]{zaremba2014recurrent}
-Wojciech Zaremba, Ilya Sutskever, and Oriol Vinyals. 2014.
+\bibitem[Zaremba et~al.(2014)Zaremba, Sutskever, and
+  Vinyals]{zaremba2014recurrent}
+Wojciech Zaremba, Ilya Sutskever, and Oriol Vinyals.
 \newblock Recurrent neural network regularization.
-\newblock {\em arXiv preprint arXiv:1409.2329\/} .
+\newblock \emph{arXiv preprint arXiv:1409.2329}, 2014.
 
 \end{thebibliography}
